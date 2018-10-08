@@ -1,0 +1,4 @@
+INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `LAST_LOGIN`, `ROLE`) VALUES ('admin', '$2a$12$KcEqIspafLltyaXYMZ9CpurCQUnoE2idjWkeaBegGr/DWYD04tSkq', 'Admin', 'User', null, 'ROLE_ADMIN');
+
+INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `LAST_LOGIN`, `ROLE`) VALUES  ('user1', '$2a$12$aCS4dkuMPV6KVrUUnM5vgu8vzR9W9vEAG1decpcJnWoM0paFqFTcu', 'Teszt', 'Elek', null, 'ROLE_USER');
+INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `LAST_LOGIN`, `ROLE`) VALUES  ('user2', '$2a$12$aCS4dkuMPV6KVrUUnM5vgu8vzR9W9vEAG1decpcJnWoM0paFqFTcu', 'John', 'Doe', null, 'ROLE_USER');
