@@ -31,8 +31,6 @@ public class UserController {
         return ResponseEntity.ok(userRepository.save(user));
     }
 
-
-
     @GetMapping("/users")
     //@Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     public ResponseEntity<Iterable<User>> getAll() {

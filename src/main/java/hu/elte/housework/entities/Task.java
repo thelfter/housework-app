@@ -1,5 +1,6 @@
 package hu.elte.housework.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,6 +17,7 @@ import java.util.Date;
 @EqualsAndHashCode
 public class Task {
     @Id
+    @Column(name = "task_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -36,7 +38,12 @@ public class Task {
     private Date dueDate;
 
     @Column
-    @NotNull
-    private Boolean completed;
+    private Boolean isCompleted;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
 }

@@ -1,7 +1,9 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Task;
+import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.TaskRepository;
+import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @PostMapping("/tasks")
@@ -54,6 +59,21 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/tasks/{id}/assigne")
+    public ResponseEntity<Task> assigneTask(@PathVariable Integer id, @RequestBody User user) {
+        Optional<Task> oTask = taskRepository.findById(id);
+        Optional<User> oUser = userRepository.findById(user.getId());
+        System.out.println(oUser.isPresent());
+        if (oTask.isPresent() && oUser.isPresent()) {
+            Task task = oTask.get();
+            task.setUser(user);
+            return ResponseEntity.ok(taskRepository.save(task));
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
     @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @DeleteMapping("tasks/{id}")
     public ResponseEntity deleteTask(@PathVariable Integer id) {
@@ -66,4 +86,6 @@ public class TaskController {
 
         return ResponseEntity.notFound().build();
     }
+
+
 }
