@@ -5,10 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Data
@@ -33,17 +34,25 @@ public class Task {
     @NotNull
     private Integer score;
 
-    @Column
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dueDate;
+    @Column(name = "CREATED_DATE", columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    private LocalDate createdDate;
 
-    @Column
+    @Column()
+    private LocalDate dueDate;
+
+
+    @Column(name = "IS_COMPLETED", columnDefinition = "BOOLEAN DEFAULT false")
     private Boolean isCompleted;
 
-
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn
     @JsonIgnore
     private User user;
+
+    @PrePersist
+    public void prePersist() {
+        this.isCompleted = false;
+        this.createdDate = LocalDate.now();
+    }
 
 }

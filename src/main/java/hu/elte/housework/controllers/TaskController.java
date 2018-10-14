@@ -1,7 +1,6 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Task;
-import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.TaskRepository;
 import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +39,8 @@ public class TaskController {
     @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
-        if (oTask.isPresent()) {
-            return ResponseEntity.ok(oTask.get());
-        }
+        return oTask.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 
-        return ResponseEntity.notFound().build();
     }
 
     @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
@@ -59,14 +55,13 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/tasks/{id}/assigne")
-    public ResponseEntity<Task> assigneTask(@PathVariable Integer id, @RequestBody User user) {
+    @PutMapping("/tasks/{id}/finished")
+    public ResponseEntity<Task> finishTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
-        Optional<User> oUser = userRepository.findById(user.getId());
-        System.out.println(oUser.isPresent());
-        if (oTask.isPresent() && oUser.isPresent()) {
+        if (oTask.isPresent()) {
             Task task = oTask.get();
-            task.setUser(user);
+            task.setIsCompleted(true);
+            task.setUser(null);
             return ResponseEntity.ok(taskRepository.save(task));
         }
 
