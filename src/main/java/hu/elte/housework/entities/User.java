@@ -51,6 +51,9 @@ public class User implements Serializable {
     @Column(name = "score", columnDefinition = "Decimal(10) default '0'")
     private Integer score;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
+    private Room room;
+
     public enum Role {
         ROLE_GUEST, ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
