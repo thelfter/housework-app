@@ -43,7 +43,7 @@ public class UserController {
         Iterable<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
-
+    
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id) {
         Optional<User> oUser = userRepository.findById(id);
@@ -51,6 +51,7 @@ public class UserController {
 
     }
 
+    @Secured({"ROLE_ADMIN"})
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user){
         Optional<User> oUser = userRepository.findById(id);
@@ -61,6 +62,7 @@ public class UserController {
 
         return ResponseEntity.notFound().build();
     }
+
 
     @PutMapping("/users/{id}/add-score")
     public ResponseEntity<User> addScore(@PathVariable Integer id, @RequestParam Integer scorePoint) {

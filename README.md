@@ -39,21 +39,23 @@ Szerepek
 ## 2. Tervezés
 ### 2.1 Végpontok
 - `GET /` Főoldal
-- `GET /login` Bejelentkező oldal
-- `POST /login` Bejelentkezés
-- `GET /logout` Kijelentkezés
-- `GET /register` Regisztrációs oldal
 - `POST /register` Regisztrálás
 - `GET /users` Tagok listázása
 - `GET /users/:id` Egy tag adatlapja
 - `PUT /users/:id` Egy tag adatainak módosítása
+- `PUT /users/:id/add-score?scorePoint=` Egy tag pontszámának módosítása
+- `PUT /users/:id/assigne` Házimunka hozzárendelése egy felhasználóhoz
 - `GET /users/:id/finished` Egy tag elvégzett feladatai
-- `GET /users/:id/delete` Egy tag törlése
-- `GET /housework` Házimunkák böngészése
-- `GET /housework/:id` Egy házimunka adatlapja
-- `GET /housework/:id/edit` Egy házimunka szerkesztésének űrlapja
-- `POST /housework/:id/edit` Házimunka módosításának elküldése
-- `GET /housework/:id/assigne` Házimunka végzése
-- `GET /housework/:id/delete` Házimunka törlése
-- `GET /housework/add` Új házimunka hozzáadásának űrlapja
-- `POST /housework/add` Új házimunka mentése
+- `DELETE /users/:id` Egy tag törlése
+
+- `GET /tasks` Házimunkák böngészése
+- `GET /tasks/:id` Egy házimunka adatlapja
+- `POST /tasks` Új házimunka hozzáadása
+- `PUT /tasks/:id` Házimunka módosítása
+- `PUT /tasks/:id/finished` Házimunka státusza 'Kész'-re állítása
+- `DELETE /tasks/:id` Házimunka törlése
+
+
+### 2.2 Adatbázisterv
+
+![alt Database schema](https://github.com/thelfter/housework-app/blob/master/sql.svg)

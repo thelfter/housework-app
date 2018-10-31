@@ -62,4 +62,9 @@ public class User implements Serializable {
         this.score += scorePoint;
     }
 
+    @PrePersist
+    protected void onCreate() {
+        if (score == null) { score = 0; }
+    }
+
 }

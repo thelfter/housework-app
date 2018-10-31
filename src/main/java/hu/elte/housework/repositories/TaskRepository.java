@@ -8,8 +8,4 @@ import java.util.Optional;
 public interface TaskRepository extends CrudRepository<Task, Integer> {
     Optional<Task> findByTaskName(String taskName);
 
-    Optional<Task> findTasksByScoreGreaterThan(Integer number);
-
-    Optional<Task> findTasksByIsCompletedIsFalse();
-
 }
