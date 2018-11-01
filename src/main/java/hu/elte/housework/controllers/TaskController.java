@@ -30,12 +30,14 @@ public class TaskController {
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/tasks")
     public ResponseEntity<Iterable<Task>> getAll() {
         Iterable<Task> tasks = taskRepository.findAll();
         return ResponseEntity.ok(tasks);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
@@ -55,6 +57,7 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @PutMapping("/tasks/{id}/finished")
     public ResponseEntity<Task> finishTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);

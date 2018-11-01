@@ -6,3 +6,5 @@ INSERT INTO `USER` (`USERNAME`, `PASSWORD`, `FIRST_NAME`, `LAST_NAME`, `LAST_LOG
 insert into `TASK` (`TASK_NAME`, `TASK_DESCRIPTION`, `SCORE`, `DUE_DATE`, `IS_COMPLETED`, `USER_ID`) values ('proin at turpis', 'Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 1, '2018-03-14', FALSE, 1);
 
 insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (1, 'Patrik szoba' , 1);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (2, 'Geri szoba' , 2);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (3, 'Petko' , 3);

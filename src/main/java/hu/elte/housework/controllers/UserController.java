@@ -38,12 +38,13 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    @Secured({"ROLE_OWNER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     public ResponseEntity<Iterable<User>> getAll() {
         Iterable<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
-    
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable Integer id) {
         Optional<User> oUser = userRepository.findById(id);
@@ -63,7 +64,20 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @Secured({"ROLE_ADMIN"})
+    @PutMapping("/users/{id}/set-to-owner")
+    public ResponseEntity<User> setUserToOwner(@PathVariable Integer id){
+        Optional<User> oUser = userRepository.findById(id);
+        if(oUser.isPresent()){
+            User user = oUser.get();
+            user.setRole(User.Role.ROLE_OWNER);
+            return ResponseEntity.ok(userRepository.save(user));
+        }
 
+        return ResponseEntity.notFound().build();
+    }
+
+    @Secured({"ROLE_ADMIN", "ROLE_OWNER"})
     @PutMapping("/users/{id}/add-score")
     public ResponseEntity<User> addScore(@PathVariable Integer id, @RequestParam Integer scorePoint) {
         Optional<User> oUser = userRepository.findById(id);
@@ -76,6 +90,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @PutMapping("/users/{id}/assigne")
     public ResponseEntity<Iterable<Task>> assigneTask(@PathVariable Integer id, @RequestBody List<Task> tasks) {
         Optional<User> oUser = userRepository.findById(id);
@@ -99,6 +114,7 @@ public class UserController {
 
     }
 
+    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("users/{id}")
     public ResponseEntity deleteUser(@PathVariable Integer id) {
         Optional<User> oUser = userRepository.findById(id);

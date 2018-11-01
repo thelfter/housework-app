@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -65,6 +66,7 @@ public class User implements Serializable {
     @PrePersist
     protected void onCreate() {
         if (score == null) { score = 0; }
+        if(tasks == null) { tasks = new ArrayList<>(); }
     }
 
 }

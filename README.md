@@ -45,15 +45,20 @@ Szerepek
 - `PUT /users/:id` Egy tag adatainak módosítása
 - `PUT /users/:id/add-score?scorePoint=` Egy tag pontszámának módosítása
 - `PUT /users/:id/assigne` Házimunka hozzárendelése egy felhasználóhoz
-- `GET /users/:id/finished` Egy tag elvégzett feladatai
+- `PUT /users/:id/set-to-owner` Egy felhasználó kinevezése tulajdonossá
 - `DELETE /users/:id` Egy tag törlése
 
+- `POST /tasks` Új házimunka hozzáadása
 - `GET /tasks` Házimunkák böngészése
 - `GET /tasks/:id` Egy házimunka adatlapja
-- `POST /tasks` Új házimunka hozzáadása
 - `PUT /tasks/:id` Házimunka módosítása
 - `PUT /tasks/:id/finished` Házimunka státusza 'Kész'-re állítása
 - `DELETE /tasks/:id` Házimunka törlése
+
+- `GET /rooms` Szobák listázása
+- `GET /rooms/:id` Egy szoba adatlapja
+- `PUT /rooms/:id` Egy szoba adatainak módosítása
+- `DELETE /rooms/:id` Szoba törlése
 
 
 ### 2.2 Adatbázisterv

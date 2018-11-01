@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -50,9 +49,9 @@ public class Task {
     private User user;
 
     @PrePersist
-    public void prePersist() {
-        this.isCompleted = false;
-        this.createdDate = LocalDate.now();
+    protected void prePersist() {
+        if(isCompleted == null) { isCompleted = false; }
+        if(createdDate == null) { createdDate = LocalDate.now(); }
     }
 
 }
