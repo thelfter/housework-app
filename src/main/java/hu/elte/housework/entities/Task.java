@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Task {
+public class Task implements Serializable {
     @Id
     @Column(name = "task_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +49,10 @@ public class Task {
     @JoinColumn
     @JsonIgnore
     private User user;
+
+    @ManyToMany
+    @JoinTable
+    private List<TaskCategory> categories;
 
     @PrePersist
     protected void prePersist() {

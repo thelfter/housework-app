@@ -8,3 +8,10 @@ insert into `TASK` (`TASK_NAME`, `TASK_DESCRIPTION`, `SCORE`, `DUE_DATE`, `IS_CO
 insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (1, 'Patrik szoba' , 1);
 insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (2, 'Geri szoba' , 2);
 insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (3, 'Petko' , 3);
+
+
+
+insert into `TASK_CATEGORY` (`ID`, `NAME`) values (1, 'Karbantartás');
+insert into `TASK_CATEGORY` (`ID`, `NAME`) values (2, 'Takarítás');
+insert into `TASK_CATEGORY` (`ID`, `NAME`) values (3, 'Festés');
+insert into `TASK_CATEGORY` (`ID`, `NAME`) values (4, 'Pakolás');

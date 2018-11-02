@@ -1,18 +1,13 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Room;
-import hu.elte.housework.entities.Task;
-import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.RoomRepository;
-import hu.elte.housework.repositories.TaskRepository;
 import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
