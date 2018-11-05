@@ -11,7 +11,6 @@ A program egy házimunka alkalmazás egy kisebb játékkal kiegészítve. A ját
 - Bejelentkezett felhasználóknak
   - Házimunkák böngészése
   - Házimunka végzés
-  - Elvégzett házimunkák megtekintése
 - Tulajdonos
   - Házimunka létrehozása
   - Házimunka szerkesztése
