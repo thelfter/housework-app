@@ -33,6 +33,7 @@ Szerepek
 - Vendég
 - Regisztrált felhasználó / Bérlő
 - Tulajdonos
+- Admin
 
 ![alt Use-Case Diagram](https://github.com/thelfter/housework-app/blob/master/house-work-uc-diagram.png)
 
