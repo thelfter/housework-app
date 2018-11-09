@@ -7,10 +7,11 @@ import hu.elte.housework.repositories.TaskRepository;
 import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -25,7 +26,6 @@ public class TaskController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @PostMapping("/tasks")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
         Optional<Task> oTask = taskRepository.findByTaskName(task.getTaskName());
@@ -36,14 +36,12 @@ public class TaskController {
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/tasks")
     public ResponseEntity<Iterable<Task>> getAll() {
         Iterable<Task> tasks = taskRepository.findAll();
         return ResponseEntity.ok(tasks);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/tasks/{id}")
     public ResponseEntity<Task> getTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
@@ -51,7 +49,6 @@ public class TaskController {
 
     }
 
-    @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @PutMapping("/tasks/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody Task task){
         Optional<Task> oTask = taskRepository.findById(id);
@@ -63,14 +60,44 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
+        Optional<Task> oTask = taskRepository.findById(id);
+
+        if (oTask.isPresent()) {
+            Task task = oTask.get();
+
+            for (Map.Entry<String, Object> entry : updates.entrySet()) {
+                String key = entry.getKey();
+                switch (key) {
+                    case "taskName":
+                        task.setTaskName(entry.getValue().toString());
+                        break;
+                    case "taskDescription":
+                        task.setTaskDescription(entry.getValue().toString());
+                        break;
+                    case "score":
+                        task.setScore((Integer) entry.getValue());
+                        break;
+                    case "dueDate":
+                        task.setDueDate(LocalDate.parse(entry.getValue().toString()));
+                        break;
+                    case "isCompleted":
+                        task.setIsCompleted((Boolean) entry.getValue());
+                        break;
+                }
+            }
+            return ResponseEntity.ok(taskRepository.save(task));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PutMapping("/tasks/{id}/finished")
     public ResponseEntity<Task> finishTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
         if (oTask.isPresent()) {
             Task task = oTask.get();
             task.setIsCompleted(true);
-            task.setUser(null);
             return ResponseEntity.ok(taskRepository.save(task));
         }
 
@@ -78,7 +105,6 @@ public class TaskController {
 
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/tasks/{id}/categories")
     public ResponseEntity<List<TaskCategory>> getCategory(@PathVariable Integer id){
         Optional<Task> oTask = taskRepository.findById(id);
@@ -89,7 +115,6 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
-    @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @PutMapping("/tasks/{id}/categories")
     public ResponseEntity<List<TaskCategory>> putCategory(@PathVariable Integer id, @RequestBody List<TaskCategory> categories){
         Optional<Task> oTask = taskRepository.findById(id);
@@ -117,7 +142,6 @@ public class TaskController {
         return ResponseEntity.ok(oTask.get().getCategories());
     }
 
-    @Secured({ "ROLE_OWNER", "ROLE_ADMIN" })
     @DeleteMapping("tasks/{id}")
     public ResponseEntity deleteTask(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
@@ -129,6 +153,5 @@ public class TaskController {
 
         return ResponseEntity.notFound().build();
     }
-
 
 }

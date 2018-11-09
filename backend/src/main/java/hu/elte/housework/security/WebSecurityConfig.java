@@ -3,6 +3,7 @@ package hu.elte.housework.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import static hu.elte.housework.entities.User.Role.ROLE_USER;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +37,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.PUT, "/api//users/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PUT, "/api/users/{\\d+}/set-to-owner").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PUT,"/api/users/**/add-score").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.DELETE, "/api/users/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/users/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.POST, "/api/tasks").access("hasRole('ROLE_OWNER' or hasRole('ROLE_ADMIN'))")
+                .antMatchers(HttpMethod.PUT, "/api/tasks/{\\d+}").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PATCH, "/api/tasks/{\\d+}").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PUT, "/api/tasks/{\\d+}/categories").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.DELETE, "/api/tasks/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/tasks").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/h2/**", "/api/register").permitAll()   // important!
                 .anyRequest().authenticated()
                 .and()

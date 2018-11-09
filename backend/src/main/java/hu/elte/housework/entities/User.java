@@ -59,7 +59,7 @@ public class User implements Serializable {
         ROLE_GUEST, ROLE_USER, ROLE_OWNER, ROLE_ADMIN
     }
 
-    public void setScore(Integer scorePoint) {
+    public void addScore(Integer scorePoint) {
         this.score += scorePoint;
     }
 
