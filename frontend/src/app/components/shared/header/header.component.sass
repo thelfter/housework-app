@@ -1,0 +1,61 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+
+header
+  width: 100%
+  display: block
+  height: 60px
+  background:
+    color: $lBlue
+
+  +medium
+    height: 70px
+
+  .header-wrapper
+    +row
+
+    .logo
+      color: $white
+      font:
+        weight: 600
+      cursor: pointer
+      line-height: 60px
+
+      +medium
+        line-height: 70px
+
+    nav
+      display: inline-block
+      float: right
+
+      .nav-item
+        cursor: pointer
+        line-height: 60px
+        color: $white
+        position: relative
+
+        +medium
+          line-height: 70px
+
+        &:after
+          content: ''
+          width: 4px
+          height: 4px
+          border:
+            radius: 50%
+          background:
+            color: transparent
+          position: absolute
+          bottom: -.5rem
+          left: 50%
+          transform: translateX(-50%)
+
+        &:not(:last-child)
+          margin:
+            right: 2rem
+
+        &.active
+          &:after
+            background:
+              color: $white

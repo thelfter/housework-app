@@ -1,0 +1,20 @@
+$breakpoint-small: 480px
+$breakpoint-medium: 768px
+$breakpoint-large: 960px
+$breakpoint-xlarge: 1440px
+
+=small
+  @media (min-width: $breakpoint-small)
+    @content
+
+=medium
+  @media (min-width: $breakpoint-medium)
+    @content
+
+=large
+  @media (min-width: $breakpoint-large)
+    @content
+
+=xlarge
+  @media (min-width: $breakpoint-xlarge)
+    @content
