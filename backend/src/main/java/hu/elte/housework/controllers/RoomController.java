@@ -1,13 +1,14 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Room;
+import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.RoomRepository;
 import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,13 +21,11 @@ public class RoomController {
     private RoomRepository roomRepository;
 
     @GetMapping("/rooms")
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     public ResponseEntity<Iterable<Room>> getAll() {
         Iterable<Room> rooms = roomRepository.findAll();
         return ResponseEntity.ok(rooms);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/rooms/{id}")
     public ResponseEntity<Room> getRoom(@PathVariable Integer id) {
         Optional<Room> oRoom = roomRepository.findById(id);
@@ -34,11 +33,10 @@ public class RoomController {
 
     }
 
-    @Secured({"ROLE_ADMIN"})
     @PutMapping("/rooms/{id}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Room room){
+    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Room room) {
         Optional<Room> oRoom = roomRepository.findById(id);
-        if(oRoom.isPresent()){
+        if (oRoom.isPresent()) {
             room.setId(id);
             return ResponseEntity.ok(roomRepository.save(room));
         }
@@ -46,9 +44,35 @@ public class RoomController {
         return ResponseEntity.notFound().build();
     }
 
+    @PatchMapping("/rooms/{id}")
+    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
+        Optional<Room> oRoom = roomRepository.findById(id);
+        if (oRoom.isPresent()) {
+            Room room = oRoom.get();
 
-    @Secured({"ROLE_ADMIN"})
-    @DeleteMapping("rooms/{id}")
+            for (Map.Entry<String, Object> entry : updates.entrySet()) {
+                String key = entry.getKey();
+                switch (key) {
+                    case "name":
+                        room.setName(entry.getValue().toString());
+                        break;
+                    case "owner":
+                        Optional<User> oUser = userRepository.findByUsername(entry.getValue().toString());
+                        if (oUser.isPresent()) {
+                            User user = oUser.get();
+                            room.setOwner(user);
+                        } else {
+                            return ResponseEntity.notFound().build();
+                        }
+                        break;
+                }
+            }
+            return ResponseEntity.ok(roomRepository.save(room));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/rooms/{id}")
     public ResponseEntity deleteRoom(@PathVariable Integer id) {
         Optional<Room> oRoom = roomRepository.findById(id);
         if (oRoom.isPresent()) {

@@ -39,15 +39,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.PUT, "/api//users/{\\d+}").access("hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.PUT, "/api/users/{\\d+}/set-to-owner").access("hasRole('ROLE_ADMIN')")
-                .antMatchers(HttpMethod.PUT,"/api/users/**/add-score").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PUT,"/api/users/{\\d+}/add-score").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.PATCH,"/api/users/{\\d+}").access("hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.DELETE, "/api/users/{\\d+}").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/users/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+
                 .antMatchers(HttpMethod.POST, "/api/tasks").access("hasRole('ROLE_OWNER' or hasRole('ROLE_ADMIN'))")
                 .antMatchers(HttpMethod.PUT, "/api/tasks/{\\d+}").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.PATCH, "/api/tasks/{\\d+}").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.PUT, "/api/tasks/{\\d+}/categories").access("hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
                 .antMatchers(HttpMethod.DELETE, "/api/tasks/{\\d+}").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/api/tasks").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/tasks/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+
+                .antMatchers(HttpMethod.PUT,"/api/rooms/{\\d+}").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OWNER')")
+                .antMatchers(HttpMethod.PATCH, "/api/rooms/{\\d+}").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_OWNER')")
+                .antMatchers(HttpMethod.DELETE, "/api/rooms/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/rooms/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+
+                .antMatchers(HttpMethod.PUT, "/api/category/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers(HttpMethod.DELETE, "/api/category/{\\d+}").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/category/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
+
                 .antMatchers("/h2/**", "/api/register").permitAll()   // important!
                 .anyRequest().authenticated()
                 .and()

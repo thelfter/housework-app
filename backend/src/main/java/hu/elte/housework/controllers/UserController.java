@@ -122,8 +122,13 @@ public class UserController {
         Optional<User> oUser = userRepository.findById(id);
         if (oUser.isPresent()) {
             User user = oUser.get();
-            user.addScore(scorePoint);
-            return ResponseEntity.ok(userRepository.save(user));
+
+            if(scorePoint > 0) {
+                user.addScore(scorePoint);
+                return ResponseEntity.ok(userRepository.save(user));
+            }
+
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.notFound().build();

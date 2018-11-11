@@ -16,13 +16,11 @@ public class CategoryController {
     private CategoryRepository categoryRepository;
 
     @GetMapping("/category")
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     public ResponseEntity<Iterable<TaskCategory>> getAll() {
         Iterable<TaskCategory> categories = categoryRepository.findAll();
         return ResponseEntity.ok(categories);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_OWNER"})
     @GetMapping("/category/{id}")
     public ResponseEntity<TaskCategory> getTaskCategory(@PathVariable Integer id) {
         Optional<TaskCategory> oTaskCategory = categoryRepository.findById(id);
@@ -30,7 +28,6 @@ public class CategoryController {
 
     }
 
-    @Secured({"ROLE_ADMIN"})
     @PutMapping("/category/{id}")
     public ResponseEntity<TaskCategory> updateTaskCategory(@PathVariable Integer id, @RequestBody TaskCategory TaskCategory){
         Optional<TaskCategory> oTaskCategory = categoryRepository.findById(id);
@@ -42,8 +39,6 @@ public class CategoryController {
         return ResponseEntity.notFound().build();
     }
 
-
-    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("category/{id}")
     public ResponseEntity deleteTaskCategory(@PathVariable Integer id) {
         Optional<TaskCategory> oTaskCategory = categoryRepository.findById(id);

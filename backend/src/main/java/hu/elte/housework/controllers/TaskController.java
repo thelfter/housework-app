@@ -50,9 +50,9 @@ public class TaskController {
     }
 
     @PutMapping("/tasks/{id}")
-    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody Task task){
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id, @RequestBody Task task) {
         Optional<Task> oTask = taskRepository.findById(id);
-        if(oTask.isPresent()){
+        if (oTask.isPresent()) {
             task.setId(id);
             return ResponseEntity.ok(taskRepository.save(task));
         }
@@ -106,38 +106,39 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/{id}/categories")
-    public ResponseEntity<List<TaskCategory>> getCategory(@PathVariable Integer id){
+    public ResponseEntity<List<TaskCategory>> getCategory(@PathVariable Integer id) {
         Optional<Task> oTask = taskRepository.findById(id);
-        if(oTask.isPresent()){
-           return ResponseEntity.ok(oTask.get().getCategories());
+        if (oTask.isPresent()) {
+            return ResponseEntity.ok(oTask.get().getCategories());
         }
 
         return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/tasks/{id}/categories")
-    public ResponseEntity<List<TaskCategory>> putCategory(@PathVariable Integer id, @RequestBody List<TaskCategory> categories){
+    public ResponseEntity<List<TaskCategory>> putCategory(@PathVariable Integer id, @RequestBody List<TaskCategory> categories) {
         Optional<Task> oTask = taskRepository.findById(id);
         if (!oTask.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        if(categories.isEmpty()){
+        if (categories.isEmpty()) {
             oTask.get().getCategories().clear();
             taskRepository.save(oTask.get());
         }
 
-        for (TaskCategory tc: categories) {
-            Optional<TaskCategory> oCat  = categoryRepository.findById(tc.getId());
+        for (TaskCategory tc : categories) {
+            Optional<TaskCategory> oCat = categoryRepository.findById(tc.getId());
             if (!oCat.isPresent()) {
                 continue;
             }
 
-            if(!oTask.get().getCategories().contains(oCat.get())){
+            if (!oTask.get().getCategories().contains(oCat.get())) {
                 oTask.get().getCategories().add(oCat.get());
             }
-            taskRepository.save(oTask.get());
         }
+
+        taskRepository.save(oTask.get());
 
         return ResponseEntity.ok(oTask.get().getCategories());
     }
