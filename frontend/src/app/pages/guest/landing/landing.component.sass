@@ -1,0 +1,26 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+  
+#landing-page
+  +row
+  position: relative
+  z-index: -1
+
+  .landing-image
+    margin:
+      top: -60px
+    width: 45%
+    height: calc(100vh - 20px)
+    background:
+      image: url('/assets/images/landing-bg.jpg')
+      size: cover
+      repeat: no-repeat
+      position: bottom center
+
+  .heading-wrapper
+    position: absolute
+    top: 50%
+    left: 40%
+    transform: translateY(-50%)
+    width: 450px
