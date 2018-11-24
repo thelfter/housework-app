@@ -1,6 +1,7 @@
-@import "sass/fonts"
-  
-hmtl, body
+@import "sass/variables/colors"
+@import "sass/mixins/breakpoints"
+
+html, body
   font:
     size: 16px
   box-sizing: border-box
@@ -10,3 +11,49 @@ hmtl, body
 
   *:focus
     outline: 0
+
+// FONTS
+  
+h1, h2, h3
+  font:
+    family: 'Noto Serif'
+    weight: 400
+  line-height: 1.4em
+  color: $black
+
+p, span, input, label, textarea, button
+  font:
+    family: 'Open Sans'
+  color: $black
+
+p
+  font:
+    size: 1rem
+    family: 'Open sans', sans-serif
+  color: $black
+  line-height: 1.8
+
+
+h1
+  font:
+    size: 2rem
+
+  +medium
+    font:
+      size: 2.5rem
+
+h2
+  font:
+    size: 1.5rem
+
+  +medium
+    font:
+      size: 2rem
+
+h3
+  font:
+    size: 1.3rem
+
+  +medium
+    font:
+      size: 1.8rem

@@ -1,0 +1,65 @@
+<section id="sign-up-page">
+  <h1>Regisztráció</h1>
+  <div class="form-container">
+    <div class="form">
+      <form>
+        <label class="block">
+          <input type="text">
+          <span class="label-text">Teljes név</span>
+        </label>
+
+        <label class="block">
+          <input type="text">
+          <span class="label-text">E-mail cím</span>
+        </label>
+
+        <label class="block birth-date">
+          <select>
+            <option value="">1990</option>
+          </select>
+          <select>
+            <option value="">Január</option>
+          </select>
+          <select class="day">
+            <option value="">10</option>
+          </select>
+          <span class="label-text">Születési dátum</span>
+        </label>
+
+        <p>Az ön szobája: {{selectedRoom}}</p>
+
+        <input type="submit" class="primary-button-green registration-button" value="Regisztrálok">
+
+      </form>
+    </div>
+    <div class="room-select">
+      <p>Válassza ki a szobáját:</p>
+      <svg xmlns="http://www.w3.org/2000/svg" id="blueprint" viewBox="0 0 822 419">
+        <rect class="wrapper" x="1" y="1" width="820" height="417" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+
+        <rect id="room-1" class="room available" (click)="selectedRoom = 1" [class.active]="selectedRoom == 1" x="1" y="1" width="284" height="217"/>
+        <path id="number-1" class="number" d="M146,83.6h-.2L137.7,88l-1.2-4.8,10.2-5.5h5.4v46.8H146Z" transform="translate(-5 -2.5)"/>
+        
+        <rect id="room-2" class="room not-available" (click)="selectedRoom = 2" [class.active]="selectedRoom == 2" x="537" y="1" width="284" height="134"/>
+        <path id="number-2" class="number" d="M662.2,92.5V88.7l5-4.9c12-11.3,17.4-17.4,17.4-24.4,0-4.8-2.3-9.2-9.3-9.2-4.2,0-7.7,2.2-9.9,4l-2-4.5A20.5,20.5,0,0,1,676.6,45c10.1,0,14.4,6.9,14.4,13.6,0,8.6-6.3,15.6-16.2,25.1l-3.7,3.4v.2h21v5.2Z" transform="translate(-5 -2.5)"/>
+
+        <rect id="room-3" class="room available" (click)="selectedRoom = 3" [class.active]="selectedRoom == 3" x="625" y="218" width="196" height="200"/>
+        <path id="number-3" class="number" d="M715.8,336.3a21.5,21.5,0,0,0,10.3,2.9c8.2,0,10.7-5.2,10.6-9-.1-6.6-6-9.4-12.1-9.4h-3.5V316h3.5c4.6,0,10.5-2.3,10.5-7.9,0-3.7-2.4-7-8.3-7a16.6,16.6,0,0,0-9.3,3.1l-1.7-4.6a22.4,22.4,0,0,1,12.3-3.6c9.2,0,13.4,5.4,13.4,11.1s-2.9,8.9-8.7,11v.2c5.8,1.1,10.5,5.4,10.5,12s-5.9,14-17.1,14a24,24,0,0,1-12.2-3.1Z" transform="translate(-5 -2.5)"/>
+        
+        <rect id="room-4" class="room available" (click)="selectedRoom = 4" [class.active]="selectedRoom == 4" x="1" y="218" width="228" height="200"/>
+        <path id="number-4" class="number" d="M120.8,350.5V337.8H99.1v-4.2L120,303.7h6.8v29.1h6.6v5h-6.6v12.7Zm0-17.7V317.2c0-2.4.1-4.9.2-7.3h-.2c-1.4,2.7-2.6,4.7-3.9,6.9l-11.4,15.9h15.3Z" transform="translate(-5 -2.5)"/>
+        
+
+        <rect x="625" y="135" width="196" height="83" style="fill:#fff;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <rect x="285" y="1" width="252" height="134" style="fill:#fff;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="285" y1="183" x2="258" y2="156" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="580" y1="108" x2="553" y2="135" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="652" y1="294" x2="625" y2="321" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="229" y1="249" x2="202" y2="276" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+        <line x1="587" y1="391" x2="614" y2="418" style="fill:none;stroke:#77C9D4;stroke-miterlimit:10;stroke-width:2px"/>
+
+      </svg>
+      <input type="hidden" name="room" >
+    </div>
+  </div>
+</section>

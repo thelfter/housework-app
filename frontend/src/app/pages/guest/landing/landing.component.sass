@@ -11,16 +11,22 @@
     margin:
       top: -60px
     width: 45%
-    height: calc(100vh - 20px)
+    height: 100vh
     background:
       image: url('/assets/images/landing-bg.jpg')
       size: cover
       repeat: no-repeat
       position: bottom center
 
+    +medium
+      height: calc(100vh - 20px)
+
   .heading-wrapper
     position: absolute
     top: 50%
-    left: 40%
+    left: 30%
     transform: translateY(-50%)
-    width: 450px
+    max-width: 450px
+
+    +medium
+      left: 40%

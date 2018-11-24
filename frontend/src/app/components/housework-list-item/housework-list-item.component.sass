@@ -1,0 +1,29 @@
+@import "sass/variables/colors"
+  
+.housework-item
+  background:
+    color: rgba($lBlue2, .2)
+  padding: 1.5rem 1.5rem 3rem 1.5rem
+  cursor: pointer
+  position: relative
+  box-shadow: 0 2px 8px 0 rgba(darken($lBlue2, 40%),.05)
+  transition: background .1s ease-in-out
+
+  &:hover
+    background:
+      color: rgba($lBlue2, .4)
+
+  .title
+    font:
+      size: 1.2rem
+    line-height: 1.5
+    color: darken($lBlue2, 30%)
+
+  .points
+    position: absolute
+    bottom: .5rem
+    right: 1rem
+    color: darken($lBlue2, 30%)
+    font:
+      style: italic
+      weight: 600

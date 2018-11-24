@@ -1,0 +1,74 @@
+label
+  position: relative
+  display: inline-block
+  width: 100%
+  max-width: 400px
+  margin:
+    top: calc(1.8rem + 6px)
+    //right: .5rem
+    bottom: .5rem
+    //left: .5rem
+
+  &.full-width
+    width: 100%
+  
+  &.block
+    display: block
+
+    &.center
+      margin:
+        left: auto
+        right: auto
+
+  input
+    width: 100%
+    color: darken($grey, 30%)
+
+  input, textarea, select
+    min-height: 2.5rem
+    border: 1px solid $grey
+      radius: 1px
+    font:
+      size: 1.1rem
+    transition: border-color .1s ease-in-out
+
+    &:focus 
+      border:
+        color: $lBlue2
+      color: $lBlue2
+
+  input, textarea
+    text:
+      indent: .5rem
+
+    + .label-text
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+      left: 10px
+      font:
+        size: 1rem
+      color: $grey
+      transition: all .1s ease-in-out
+      cursor: text
+
+    &:focus 
+      + .label-text
+        cursor: auto
+        color: $lBlue2
+        top: initial
+        bottom: calc(100% + 6px)
+        transform: none
+        left: 4px
+        font:
+          size: .85rem
+     
+  select
+    padding: 0 1rem
+
+    + .label-text
+      position: absolute
+      bottom: calc(100% + 6px)
+      left: 4px
+      font:
+        size: .85rem

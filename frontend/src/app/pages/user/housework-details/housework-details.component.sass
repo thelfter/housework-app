@@ -1,0 +1,72 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/buttons"
+@import "sass/variables/colors"
+
+#housework-details
+  +row
+  +page-margin
+
+  .details-container
+    +medium
+      display: flex
+      align-items: center
+
+    .description
+      width: 100%
+      display: block
+      
+      +medium
+        display: inline
+        width: 50%
+        padding:
+          right: 2rem
+
+    .points-wrapper
+      padding:
+        top: 3rem
+        bottom: 3rem
+      width: 100%
+      display: block
+      margin: 2rem auto 0 auto
+
+      +small
+        padding: 3rem
+
+      +medium
+        display: inline
+        width: 50%
+        margin:
+          top: 0
+
+      .points-container
+        text:
+          align: center
+        background:
+          color: rgba($lBlue1, .4)
+        padding: 2rem
+
+        .before-text, .points, .after-text
+          color: $mBlue1
+          display: block
+
+        .points
+          font:
+            size: 8rem
+            family: 'Noto Serif'
+          line-height: 1
+          padding: 2rem 0
+
+  .add-todo-btn
+    display: block
+    margin: 2rem auto 0 auto
+    width: 100%
+    min-height: 4rem
+
+    +medium
+      width: 600px
+      min-height: 6rem
+      font:
+        size: 1.2rem
+      margin:
+        top: 3rem

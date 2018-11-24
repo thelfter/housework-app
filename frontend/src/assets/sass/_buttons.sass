@@ -1,0 +1,28 @@
+@import "variables/colors"
+  
+=primary-button($bg-color, $text-color)
+  display: inline-block
+  background:
+    color: #{$bg-color}
+  color: #{$text-color}
+  text:
+    transform: uppercase
+  padding: 1rem 1.8rem
+  font:
+    size: .9rem
+  cursor: pointer
+  border: none
+  outline: none
+  transition: all .1s ease-in-out
+
+  &:hover
+    @if (type-of($bg-color) == 'color')
+      background:
+        color: darken($bg-color, 10%)
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .05)
+
+.primary-button-green
+  +primary-button($lGreen1, $white)
+
+.primary-button-blue
+  +primary-button($mBlue1, $white)

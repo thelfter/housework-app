@@ -8,6 +8,10 @@ import { LandingComponent } from './pages/guest/landing/landing.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { LoginComponent } from './pages/guest/login/login.component';
+import { SignupComponent } from './pages/guest/signup/signup.component';
+import { HouseworkBrowserComponent } from './pages/user/housework-browser/housework-browser.component';
+import { HouseworkListItemComponent } from './components/housework-list-item/housework-list-item.component';
+import { HouseworkDetailsComponent } from './pages/user/housework-details/housework-details.component';
 
 
 @NgModule({
@@ -16,7 +20,11 @@ import { LoginComponent } from './pages/guest/login/login.component';
     LandingComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
+    HouseworkBrowserComponent,
+    HouseworkListItemComponent,
+    HouseworkDetailsComponent
   ],
   imports: [
     BrowserModule,

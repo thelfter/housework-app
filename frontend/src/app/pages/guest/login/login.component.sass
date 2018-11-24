@@ -1,0 +1,45 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+@import "sass/buttons"
+@import "sass/forms"
+  
+#login-page
+  +row
+  +page-margin
+  text:
+    align: center
+  margin:
+    top: 4rem
+
+  .icon-wrapper
+    display: block
+    margin: 0 auto 2rem auto
+    width: 160px
+    height: 160px
+    border:
+      radius: 50%
+    background:
+      color: $lBlue2
+    text:
+      align: center
+
+    i
+      font:
+        size: 86px
+      color: $white
+      line-height: 180px
+
+  form
+    display: block
+    text:
+      align: center
+    
+    label
+      margin:
+        left: auto
+        right: auto
+
+    .primary-button
+      margin:
+        top: 1rem

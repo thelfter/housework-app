@@ -7,7 +7,7 @@ header
   display: block
   height: 60px
   background: rgb(120,211,188)
-  background: linear-gradient(to right, rgba(120,211,188,1) 0%,rgba(98,209,179,1) 100%)
+  background: linear-gradient(to right, $lGreen1 0%, $lBlue2 100%)
   box:
     shadow: 0 0 16px 0 rgba(0, 0, 0, .05)
   transition: background-color .1s ease-in-out, box-shadow .1s ease-in-out
@@ -68,10 +68,16 @@ header
           bottom: -.5rem
           left: 50%
           transform: translateX(-50%)
+          transition: background .1s ease-in-out
 
         &:not(:last-child)
           margin:
             right: 2rem
+
+        &:hover
+          &:after
+            background:
+              color: rgba($white, .4)
 
         &.active
           &:after
