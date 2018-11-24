@@ -1,0 +1,70 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+
+#todo-housework-card
+  display: block
+  background:
+    color: rgba($lBlue1, .4)
+
+  .head
+    background:
+      color: rgba($lBlue1, .3)
+    padding: 1.2rem
+    
+    .title
+      color: $mBlue1
+
+  .value
+    display: block
+    padding: 2rem 1rem
+    font:
+      size: 3rem
+      family: 'Noto Serif'
+    line-height: 1
+    color: $mBlue1
+    text:
+      align: center
+
+    +medium
+      padding:
+        top: 3rem
+        bottom: 3rem
+      font:
+        size: 5rem
+
+  .ctas
+    .remove, .complete
+      display: inline-block
+      height: 3rem
+      line-height: 3rem
+      cursor: pointer
+      float: left
+      text:
+        align: center
+      transition: background .1s ease-in-out
+
+    .remove
+      width: 30%
+      min-width: 50px
+      background:
+        color: $lRed1
+      
+      &:hover
+        background:
+          color: darken($lRed1, 5%)
+
+      .fas
+        color: darken($lRed1, 18%)
+
+    .complete
+      width: 70%
+      min-width: 90px
+      background:
+        color: $lGreen2
+
+      &:hover
+        background:
+          color: darken($lGreen2, 5%)
+      
+      .fas
+        color: darken($lGreen2, 25%)

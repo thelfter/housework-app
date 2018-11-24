@@ -1,0 +1,63 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+
+#housework-history 
+  .period
+    &.completed
+      .period-name, .points
+        color: darken($lGreen2, 20%)
+      
+      .period-name:after
+        background:
+          color: darken($lGreen2, 20%)
+      
+    &.failed
+      .period-name, .points
+        color: $lRed1
+
+      .period-name:after
+        background:
+          color: $lRed1
+
+    .period-name
+      display: block
+      text:
+        align: center
+      margin: 2rem 0 3.5rem 0
+      position: relative
+
+      &:after
+        content: ''
+        position: absolute
+        top: calc(100% + 1rem)
+        left: 50%
+        transform: translateX(-50%)
+        width: 1px
+        height: 30px
+        background:
+          color: $black
+
+    .points
+      text:
+        align: center
+      margin:
+        top: 0
+
+  .completed-housework-container
+    display: grid
+    grid:
+      template-columns: repeat(1, 1fr)
+      gap: .5rem
+
+    +small
+      grid:
+        template-columns: repeat(2, 1fr)
+        gap: 1.5rem
+
+    +medium
+      grid:
+        template-columns: repeat(3, 1fr)
+
+    +large
+      grid:
+        template-columns: repeat(4, 1fr)

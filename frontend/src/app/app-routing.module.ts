@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/guest/login/login.component';
 import { SignupComponent } from './pages/guest/signup/signup.component';
 import { HouseworkBrowserComponent } from './pages/user/housework-browser/housework-browser.component';
 import { HouseworkDetailsComponent } from './pages/user/housework-details/housework-details.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignupComponent },
   { path: 'housework-browser', component: HouseworkBrowserComponent },
   { path: 'housework/:id', component: HouseworkDetailsComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: '**', redirectTo: '' }
 ];
 

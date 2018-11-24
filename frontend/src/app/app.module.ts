@@ -12,6 +12,12 @@ import { SignupComponent } from './pages/guest/signup/signup.component';
 import { HouseworkBrowserComponent } from './pages/user/housework-browser/housework-browser.component';
 import { HouseworkListItemComponent } from './components/housework-list-item/housework-list-item.component';
 import { HouseworkDetailsComponent } from './pages/user/housework-details/housework-details.component';
+import { ProfileComponent } from './pages/user/profile/profile.component';
+import { PointsInfoCardComponent } from './components/cards/points-info-card/points-info-card.component';
+import { TodoHouseworkCardComponent } from './components/cards/todo-housework-card/todo-housework-card.component';
+import { CompletedHouseworkCardComponent } from './components/cards/completed-housework-card/completed-housework-card.component';
+import { HouseworkHistoryComponent } from './components/housework-history/housework-history.component';
+import { LoadMoreComponent } from './components/shared/load-more/load-more.component';
 
 
 @NgModule({
@@ -24,7 +30,13 @@ import { HouseworkDetailsComponent } from './pages/user/housework-details/housew
     SignupComponent,
     HouseworkBrowserComponent,
     HouseworkListItemComponent,
-    HouseworkDetailsComponent
+    HouseworkDetailsComponent,
+    ProfileComponent,
+    PointsInfoCardComponent,
+    TodoHouseworkCardComponent,
+    CompletedHouseworkCardComponent,
+    HouseworkHistoryComponent,
+    LoadMoreComponent
   ],
   imports: [
     BrowserModule,
