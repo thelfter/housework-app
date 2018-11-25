@@ -1,3 +1,25 @@
-<p>
-  user-profile works!
-</p>
+<section id="user-profile">
+  <h1>John Doe</h1>
+
+  <div class="actual-housework-period">
+    <h3 class="period-name">December</h3>
+
+    <div class="points-info-container">
+      <app-points-info-card [title]="'Elért havi pontszám'" [value]="'6/10'"></app-points-info-card>
+      <app-points-info-card [title]="'Listán szereplő pontszámok összege'" [value]="8"></app-points-info-card>
+      <app-points-info-card [title]="'Összpontszám'" [value]="64"></app-points-info-card>
+    </div>
+    
+    <h3>Elvégzendő házimunkák:</h3>
+    <div class="todo-housework-container">
+      <app-small-housework-card *ngFor="let item of [1,2,3,4]" [title]="'Excepteur sint occaecat cupidatat non proident sunt'" [value]="2"></app-small-housework-card>
+    </div>
+    
+  </div>
+
+  <div class="housework-history">
+    <h3>Elvégzett házimunkák:</h3>
+
+    <app-housework-history></app-housework-history>
+  </div>
+</section>

@@ -21,6 +21,8 @@ import { LoadMoreComponent } from './components/shared/load-more/load-more.compo
 import { HouseworksComponent } from './pages/owner/houseworks/houseworks.component';
 import { UserListComponent } from './pages/owner/user-list/user-list.component';
 import { UserProfileComponent } from './pages/owner/user-profile/user-profile.component';
+import { HouseworkToApproveCardComponent } from './components/cards/housework-to-approve-card/housework-to-approve-card.component';
+import { UserCardComponent } from './components/cards/user-card/user-card.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { UserProfileComponent } from './pages/owner/user-profile/user-profile.co
     LoadMoreComponent,
     HouseworksComponent,
     UserListComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    HouseworkToApproveCardComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,

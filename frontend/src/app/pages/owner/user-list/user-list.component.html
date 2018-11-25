@@ -1,3 +1,7 @@
-<p>
-  user-list works!
-</p>
+<section id="user-list">
+  <h1>Felhasználók</h1>
+
+  <div class="user-list-container">
+    <app-user-card [name]="'John Doe'" routerLink="/owner/user/1" *ngFor="let item of [1,2,3,4,5,6]"></app-user-card>
+  </div>
+</section>

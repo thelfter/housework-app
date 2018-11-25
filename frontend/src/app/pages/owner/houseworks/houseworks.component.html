@@ -1,10 +1,14 @@
 <section id="houseworks">
   <h1>Házimunkák</h1>
 
-  <h2>Havi minimum pontszám: </h2>
+  <h2>Havi minimum pontszám: <input type="number" id="min-points" min="1"></h2>
 
-  <div class="houseworks-to-approve">
+  <div class="houseworks-to-approve-container">
+    <h3>Ellenőrzésre várnak:</h3>
 
+    <div class="houseworks-to-approve">
+      <app-housework-to-approve-card *ngFor="let item of [1,2,3,4,5,6,7]" [name]="'John Doe'" [title]="'Excepteur sint occaecat cupidatat non proident sunt'"></app-housework-to-approve-card>
+    </div>
   </div>
 
   <div class="housework-list-container">
