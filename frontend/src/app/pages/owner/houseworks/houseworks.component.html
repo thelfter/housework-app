@@ -1,0 +1,20 @@
+<section id="houseworks">
+  <h1>Házimunkák</h1>
+
+  <h2>Havi minimum pontszám: </h2>
+
+  <div class="houseworks-to-approve">
+
+  </div>
+
+  <div class="housework-list-container">
+    <h3>Házimunkák listája</h3>
+
+    <div class="housework-list">
+      <app-small-housework-card class="new-housework" [title]="'Új házimunka'" [value]="'+'"></app-small-housework-card>
+
+      <app-small-housework-card *ngFor="let item of [1,2,3,4,5,6,7]" [title]="'Excepteur sint occaecat cupidatat non proident sunt'" [value]="2"></app-small-housework-card>
+    </div>
+    
+  </div>
+</section>

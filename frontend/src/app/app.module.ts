@@ -15,9 +15,12 @@ import { HouseworkDetailsComponent } from './pages/user/housework-details/housew
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { PointsInfoCardComponent } from './components/cards/points-info-card/points-info-card.component';
 import { TodoHouseworkCardComponent } from './components/cards/todo-housework-card/todo-housework-card.component';
-import { CompletedHouseworkCardComponent } from './components/cards/completed-housework-card/completed-housework-card.component';
+import { SmallHouseworkCardComponent } from './components/cards/small-housework-card/small-housework-card.component';
 import { HouseworkHistoryComponent } from './components/housework-history/housework-history.component';
 import { LoadMoreComponent } from './components/shared/load-more/load-more.component';
+import { HouseworksComponent } from './pages/owner/houseworks/houseworks.component';
+import { UserListComponent } from './pages/owner/user-list/user-list.component';
+import { UserProfileComponent } from './pages/owner/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -34,9 +37,12 @@ import { LoadMoreComponent } from './components/shared/load-more/load-more.compo
     ProfileComponent,
     PointsInfoCardComponent,
     TodoHouseworkCardComponent,
-    CompletedHouseworkCardComponent,
+    SmallHouseworkCardComponent,
     HouseworkHistoryComponent,
-    LoadMoreComponent
+    LoadMoreComponent,
+    HouseworksComponent,
+    UserListComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
