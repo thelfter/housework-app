@@ -1,0 +1,36 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+  
+#small-housework-card
+  display: flex
+  align-items: stretch
+  background:
+    color: rgba($lBlue1, .4)
+  cursor: pointer
+  transition: background .1s ease-in-out
+
+  &:hover
+    background:
+      color: rgba($lBlue1, .5)
+
+  .title, .value
+    display: flex
+    align-items: center
+    
+  .title
+    padding: 1.2rem
+    color: $mBlue1
+    width: 75%
+
+  .value
+    padding: 1.2rem
+    color: $mBlue1
+    justify-content: center
+    width: 25%
+    text:
+      align: center
+    background:
+      color: rgba($lBlue1, .4)
+    font:
+      size: 2rem
+      family: 'Noto Serif'

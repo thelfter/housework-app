@@ -1,0 +1,21 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+
+#housework-browser
+  +row
+  +page-margin
+
+  .housework-list
+    display: grid
+    grid:
+      template-columns: repeat(1, 1fr)
+      gap: 1.5rem
+
+    +small
+      grid:
+        template-columns: repeat(2, 1fr)
+
+    +medium
+      grid:
+        template-columns: repeat(3, 1fr)

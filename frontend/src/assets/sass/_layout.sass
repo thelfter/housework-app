@@ -1,0 +1,45 @@
+
+@import "variables/breakpoints"
+
+.grid-row
+  &:after
+    content: ''
+    display: table
+    clear: both
+
+  [class*="grid-col-"]
+    width: 100%
+    float: left
+    padding:
+      left: .8rem
+      right: .8rem
+    min-height: 1px
+
+  @for $i from 1 through 12
+    .grid-col-#{$i}
+      width: percentage(100 / (12 / $i) / 100)
+
+    $floored: floor(12/$i)
+
+    [class*="grid-col-#{$i}"]
+      &:nth-of-type(#{$floored}n)
+        padding:
+          right: 0
+
+      &:nth-of-type(#{$floored}n + 1)
+        padding:
+          left: 0
+
+  $breakpoints: (small: $breakpoint-small, medium: $breakpoint-medium, large: $breakpoint-large, xlarge: $breakpoint-xlarge)
+
+  @each $name, $breakpoint in $breakpoints
+    @media all and (min-width: $breakpoint)
+      @for $i from 1 through 12
+        .grid-col-#{$i}-#{$name}
+          width: percentage(100 / (12 / $i) / 100)
+
+  @media all and (min-width: $breakpoint-xlarge)
+    [class*="grid-col-"]
+      padding:
+        left: 1.5rem
+        right: 1.5rem

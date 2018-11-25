@@ -1,0 +1,63 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+@import "sass/mixins/layout"
+
+#housework-to-approve
+  background:
+    color: rgba($lBlue1, .4)
+
+  .name, .title
+    display: block
+    color: $mBlue1
+
+  .name
+    background:
+      color: rgba($lBlue1, .4)
+    font:
+      size: 1.3rem
+      weight: 600
+    text:
+      align: center
+    padding: 1.2rem
+    
+  .title
+    padding: 2rem 1.2rem
+
+  .ctas
+    display: block
+
+    .approve, .decline
+      display: inline-block
+      height: 3rem
+      line-height: 3rem
+      cursor: pointer
+      float: left
+      text:
+        align: center
+      transition: background .1s ease-in-out
+
+    .decline
+      width: 30%
+      min-width: 50px
+      background:
+        color: $lRed1
+      
+      &:hover
+        background:
+          color: darken($lRed1, 5%)
+
+      .fas
+        color: darken($lRed1, 18%)
+
+    .approve
+      width: 70%
+      min-width: 90px
+      background:
+        color: $lGreen2
+
+      &:hover
+        background:
+          color: darken($lGreen2, 5%)
+      
+      .fas
+        color: darken($lGreen2, 25%)

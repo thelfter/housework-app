@@ -1,0 +1,10 @@
+<header [ngClass]="{'bright': currentUrl == '/'}">
+  <div class="header-wrapper">
+    <span class="logo" routerLink="/">HOUSEWORK</span>
+
+    <nav>
+      <span routerLink="/login" routerLinkActive="active" class="nav-item">Bejelentkezés</span>
+      <span routerLink="/sign-up" routerLinkActive="active" class="nav-item">Regisztráció</span>
+    </nav>
+  </div>
+</header>

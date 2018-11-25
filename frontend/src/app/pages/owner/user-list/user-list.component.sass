@@ -1,0 +1,26 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+@import "sass/mixins/layout"
+  
+#user-list
+  +row
+  +page-margin
+
+  .user-list-container
+    display: grid
+    grid:
+      template-columns: repeat(1, 1fr)
+      gap: .5rem
+
+    +small
+      grid:
+        template-columns: repeat(2, 1fr)
+        gap: 1.5rem
+
+    +medium
+      grid:
+        template-columns: repeat(3, 1fr)
+
+    +large
+      grid:
+        template-columns: repeat(4, 1fr)

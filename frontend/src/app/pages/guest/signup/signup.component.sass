@@ -1,0 +1,118 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+@import "sass/buttons"
+@import "sass/forms"
+  
+#sign-up-page
+  +row
+  +page-margin
+
+  .form-container
+    display: grid
+    grid:
+      gap: 20px
+      auto-columns: 1fr
+
+    +medium
+      grid:
+        gap: 80px
+
+    .form, .room-select
+      grid:
+        row: 2
+
+      +medium
+        grid:
+          row: 1
+      
+      +large
+        grid:
+          column: 1/3
+
+    .form
+      label
+        max-width: 100%
+
+    .room-select
+      grid:
+        row: 1
+
+      +large
+        grid:
+          column: 3/6
+
+      #blueprint
+        width: 100%
+
+        .room
+          stroke: $mBlue2
+          fill: none
+          stroke-miterlimit: 10
+          stroke-width: 2px
+          transition: fill .1s ease-in-out
+
+          + .number
+            transition: fill .1s ease-in-out
+            fill: $white
+            pointer-events: none
+
+          &.available
+            cursor: pointer
+            fill: rgba($mBlue1, .2)
+
+            &:hover
+              fill: rgba($mBlue1, .35)
+
+            + .number
+              fill: rgba($mBlue1, .7)
+
+            &.active
+              fill: rgba($mGreen1, .4)
+
+              + .number
+                fill: rgba($mGreen1, .7)
+
+          &.not-available
+            pointer-events: none
+            fill: rgba($mOrange1, .25)
+
+            + .number
+              fill: rgba($mRed1, .7)
+
+        +medium
+          padding:
+            right: 3rem
+
+    .birth-date
+      display: flex
+      justify-content: space-between
+      border: 1px solid $grey
+
+      select
+        width: 100%
+        border:
+          top: none
+          bottom: none
+
+        &:not(:first-of-type)
+          border:
+            right: none
+            left:
+              color: rgba($grey, .3)
+        
+        &:not(:last-of-type)
+          border:
+            right: none
+
+        &:first-of-type
+          border: none
+
+        &.day
+          width: 70%
+            
+  .registration-button
+    display: block
+    margin:
+      top: 2rem
+      

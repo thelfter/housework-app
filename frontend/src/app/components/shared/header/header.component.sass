@@ -1,0 +1,85 @@
+@import "sass/mixins/breakpoints"
+@import "sass/mixins/layout"
+@import "sass/variables/colors"
+
+header
+  width: 100%
+  display: block
+  height: 60px
+  background: rgb(120,211,188)
+  background: linear-gradient(to right, $lGreen1 0%, $lBlue2 100%)
+  box:
+    shadow: 0 0 16px 0 rgba(0, 0, 0, .05)
+  transition: background-color .1s ease-in-out, box-shadow .1s ease-in-out
+
+  +medium
+    height: 70px
+
+  &.bright
+    background: transparent
+    box:
+      shadow: none
+    padding:
+      left: 2rem
+
+    .header-wrapper 
+      .logo
+        color: $black
+
+      nav .nav-item
+        color: $black
+
+  .header-wrapper
+    +row
+
+    .logo
+      color: $white
+      letter-spacing: .08em
+      cursor: pointer
+      line-height: 60px
+      transition: color .1s ease-in-out
+
+      +medium
+        line-height: 70px
+
+    nav
+      display: inline-block
+      float: right
+
+      .nav-item
+        cursor: pointer
+        line-height: 60px
+        color: $white
+        position: relative
+        transition: color .1s ease-in-out
+
+        +medium
+          line-height: 70px
+
+        &:after
+          content: ''
+          width: 4px
+          height: 4px
+          border:
+            radius: 50%
+          background:
+            color: transparent
+          position: absolute
+          bottom: -.5rem
+          left: 50%
+          transform: translateX(-50%)
+          transition: background .1s ease-in-out
+
+        &:not(:last-child)
+          margin:
+            right: 2rem
+
+        &:hover
+          &:after
+            background:
+              color: rgba($white, .4)
+
+        &.active
+          &:after
+            background:
+              color: $white

@@ -1,0 +1,38 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+
+\:host 
+  display: block
+  text:
+    align: center
+  background:
+    color: rgba($lBlue1, .4)
+  padding: 1.5rem
+
+  +medium
+    padding: 2rem 1rem 3rem 1rem
+
+  .title
+    display: block
+    margin:
+      bottom: 2rem
+    color: $mBlue1
+    font:
+      size: 1rem
+
+    +medium
+      margin:
+        bottom: 3rem
+      font:
+        size: 1.2rem
+
+  .value
+    font:
+      size: 3rem
+      family: 'Noto Serif'
+    line-height: 1
+    color: $mBlue1
+
+    +medium
+      font:
+        size: 5rem
