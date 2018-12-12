@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -23,6 +23,11 @@ import { UserListComponent } from './pages/owner/user-list/user-list.component';
 import { UserProfileComponent } from './pages/owner/user-profile/user-profile.component';
 import { HouseworkToApproveCardComponent } from './components/cards/housework-to-approve-card/housework-to-approve-card.component';
 import { UserCardComponent } from './components/cards/user-card/user-card.component';
+import { NewHouseworkComponent } from './pages/owner/new-housework/new-housework.component';
+import { AuthService } from './auth.service';
+import { HttpService } from './http.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -46,13 +51,17 @@ import { UserCardComponent } from './components/cards/user-card/user-card.compon
     UserListComponent,
     UserProfileComponent,
     HouseworkToApproveCardComponent,
-    UserCardComponent
+    UserCardComponent,
+    NewHouseworkComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, HttpService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -89,27 +89,43 @@
       justify-content: space-between
       border: 1px solid $grey
 
-      select
+      select, input
         width: 100%
         border:
           top: none
           bottom: none
 
-        &:not(:first-of-type)
+        &.year
+          border: none
+        
+        &.month
           border:
             right: none
             left:
               color: rgba($grey, .3)
-        
-        &:not(:last-of-type)
-          border:
-            right: none
-
-        &:first-of-type
-          border: none
 
         &.day
           width: 70%
+          border:
+            left:
+              color: rgba($grey, .3)
+            right: none
+
+      input[type='number']
+        -moz-appearance:textfield
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button
+        -webkit-appearance: none
+
+      .label-text
+        cursor: auto
+        top: initial
+        bottom: calc(100% + 6px)
+        transform: none
+        left: 4px
+        font-size: .85rem
+        color: $grey
             
   .registration-button
     display: block

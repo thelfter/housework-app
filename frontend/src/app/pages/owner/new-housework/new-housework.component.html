@@ -1,0 +1,26 @@
+<section id="new-housework">
+  <h1>Házimunka hozzáadása</h1>
+
+  
+    <form [formGroup]="newHouseworkForm" (ngSubmit)="submitForm()">
+      <div class="form-container">
+        <label class="task-input">
+          <input type="text" formControlName="taskName">
+          <span class="label-text">Feladat</span>
+        </label>
+
+        <label class="points-input">
+          <input type="number" formControlName="points">
+          <span class="label-text">Pont</span>
+        </label>
+
+        <label class="block description-input">
+          <textarea formControlName="description"></textarea>
+          <span class="label-text">Leírás</span>
+        </label>
+      </div>
+
+      <input type="submit" class="primary-button-green send-button" value="Hozzáad">
+
+    </form>
+</section>
