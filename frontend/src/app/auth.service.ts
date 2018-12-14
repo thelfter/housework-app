@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  private loggedInStatus = false;
   private user: User = new User();
 
   constructor(
@@ -17,10 +16,21 @@ export class AuthService {
     this.user.username = 'myusername';
     this.user.scoreActual = 12;
     this.user.scoreSum = 98;
+    this.user.role = {
+      owner: true
+    };
+  }
+
+  get getUser() {
+    return this.user;
   }
 
   get isLoggedIn() {
-    return this.loggedInStatus;
+    const token = window.localStorage.getItem('token');
+    if (token) {
+      return true;
+    }
+    return false;
   }
 
   public async login(username: string, password: string): Promise<User> {
@@ -29,7 +39,6 @@ export class AuthService {
       const token = btoa(username + ':' + password);
       window.localStorage.setItem('token', token);
       // this.user = await this.httpService.post('users/login', username) as User;
-      this.loggedInStatus = true;
 
       return Promise.resolve(this.user);
     } catch (e) {
@@ -39,10 +48,17 @@ export class AuthService {
   }
 
   public logout() {
-    this.loggedInStatus = false;
-    this.user = null;
-    window.localStorage.setItem('token', '');
+    // this.user = null;
+    window.localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  private checkRole(role: string): boolean {
+    if(!this.user) return false;
+
+    if(this.user.role[role]) return true;
+
+    return false;
   }
 
 }

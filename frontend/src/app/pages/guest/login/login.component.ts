@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,8 @@ import { AuthService } from '../../../auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+              private router: Router) {}
 
   private loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -23,8 +26,11 @@ export class LoginComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       });
     } else {
-      this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
-      console.log(this.loginForm);
+      const userPromise: Promise<User> = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+      
+      userPromise.then(user => {
+        this.router.navigateByUrl('/');
+      });
     }
   }
 

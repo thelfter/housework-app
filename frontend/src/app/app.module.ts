@@ -27,8 +27,8 @@ import { NewHouseworkComponent } from './pages/owner/new-housework/new-housework
 import { AuthService } from './auth.service';
 import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './auth.guard';
-
+import { UserGuard } from './user.guard';
+import { OwnerGuard } from './owner.guard';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,7 @@ import { AuthGuard } from './auth.guard';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, HttpService, AuthGuard],
+  providers: [AuthService, HttpService, UserGuard, OwnerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

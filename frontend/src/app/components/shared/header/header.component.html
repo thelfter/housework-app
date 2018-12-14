@@ -3,8 +3,16 @@
     <span class="logo" routerLink="/">HOUSEWORK</span>
 
     <nav>
-      <span routerLink="/login" routerLinkActive="active" class="nav-item">Bejelentkezés</span>
-      <span routerLink="/sign-up" routerLinkActive="active" class="nav-item">Regisztráció</span>
+      <ng-template [ngIf]="!authService.isLoggedIn">
+        <span routerLink="/login" routerLinkActive="active" class="nav-item">Bejelentkezés</span>
+        <span routerLink="/sign-up" routerLinkActive="active" class="nav-item">Regisztráció</span>
+      </ng-template>
+      <ng-template [ngIf]="authService.isLoggedIn">
+        <span routerLink="/housework-manager" *ngIf="authService.checkRole('owner')" routerLinkActive="active" class="nav-item">Házimunka manager</span>
+        <span routerLink="/housework-browser" routerLinkActive="active" class="nav-item">Házimunka bögészés</span>
+        <span routerLink="/profile" routerLinkActive="active" class="nav-item">Profil</span>
+        <span (click)="authService.logout()" class="nav-item">Kijelentkezés</span>
+      </ng-template>
     </nav>
   </div>
 </header>
