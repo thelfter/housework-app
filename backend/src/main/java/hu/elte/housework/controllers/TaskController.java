@@ -155,4 +155,10 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
+
+    @GetMapping("tasks/completed")
+    public ResponseEntity<Iterable<Task>> getAllCompleted() {
+        Iterable<Task> completed = taskRepository.findAllByIsCompletedTrue();
+        return ResponseEntity.ok(completed);
+    }
 }
