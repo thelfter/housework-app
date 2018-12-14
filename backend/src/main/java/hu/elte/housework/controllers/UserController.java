@@ -90,10 +90,7 @@ public class UserController {
                 String key = entry.getKey();
                 switch (key) {
                     case "firstName":
-                        user.setFirstName(entry.getValue().toString());
-                        break;
-                    case "lastName":
-                        user.setLastName(entry.getValue().toString());
+                        user.setFullName(entry.getValue().toString());
                         break;
                     case "room":
                         Optional<Room> oRoom = roomRepository.findById((Integer) entry.getValue());

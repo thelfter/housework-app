@@ -38,10 +38,6 @@ public class Task implements Serializable {
     @Column(name = "CREATED_DATE", columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate createdDate;
 
-    @Column()
-    private LocalDate dueDate;
-
-
     @Column(name = "IS_COMPLETED", columnDefinition = "BOOLEAN DEFAULT false")
     private Boolean isCompleted;
 

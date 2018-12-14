@@ -33,11 +33,7 @@ public class User implements Serializable {
 
     @Column
     @NotNull
-    private String firstName;
-
-    @Column
-    @NotNull
-    private String lastName;
+    private String fullName;
 
     @Column
     private LocalDate lastLogin;

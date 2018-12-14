@@ -11,14 +11,12 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
@@ -72,9 +70,6 @@ public class TaskController {
                         break;
                     case "score":
                         task.setScore((Integer) entry.getValue());
-                        break;
-                    case "dueDate":
-                        task.setDueDate(LocalDate.parse(entry.getValue().toString()));
                         break;
                     case "isCompleted":
                         task.setIsCompleted((Boolean) entry.getValue());
