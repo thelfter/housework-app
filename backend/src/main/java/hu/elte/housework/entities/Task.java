@@ -50,10 +50,6 @@ public class Task implements Serializable {
     @JsonIgnore
     private User user;
 
-    @ManyToMany
-    @JoinTable
-    private List<TaskCategory> categories;
-
     @PrePersist
     protected void prePersist() {
         if(isCompleted == null) { isCompleted = false; }

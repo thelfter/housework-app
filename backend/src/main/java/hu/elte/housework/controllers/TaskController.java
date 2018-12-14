@@ -1,8 +1,6 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Task;
-import hu.elte.housework.entities.TaskCategory;
-import hu.elte.housework.repositories.CategoryRepository;
 import hu.elte.housework.repositories.TaskRepository;
 import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -22,9 +19,6 @@ public class TaskController {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
@@ -103,44 +97,6 @@ public class TaskController {
 
         return ResponseEntity.notFound().build();
 
-    }
-
-    @GetMapping("/tasks/{id}/categories")
-    public ResponseEntity<List<TaskCategory>> getCategory(@PathVariable Integer id) {
-        Optional<Task> oTask = taskRepository.findById(id);
-        if (oTask.isPresent()) {
-            return ResponseEntity.ok(oTask.get().getCategories());
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-
-    @PutMapping("/tasks/{id}/categories")
-    public ResponseEntity<List<TaskCategory>> putCategory(@PathVariable Integer id, @RequestBody List<TaskCategory> categories) {
-        Optional<Task> oTask = taskRepository.findById(id);
-        if (!oTask.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        if (categories.isEmpty()) {
-            oTask.get().getCategories().clear();
-            taskRepository.save(oTask.get());
-        }
-
-        for (TaskCategory tc : categories) {
-            Optional<TaskCategory> oCat = categoryRepository.findById(tc.getId());
-            if (!oCat.isPresent()) {
-                continue;
-            }
-
-            if (!oTask.get().getCategories().contains(oCat.get())) {
-                oTask.get().getCategories().add(oCat.get());
-            }
-        }
-
-        taskRepository.save(oTask.get());
-
-        return ResponseEntity.ok(oTask.get().getCategories());
     }
 
     @DeleteMapping("tasks/{id}")
