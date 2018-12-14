@@ -1,0 +1,53 @@
+@import "sass/mixins/breakpoints"
+@import "sass/variables/colors"
+@import "sass/mixins/layout"
+@import "sass/buttons"
+@import "sass/forms"
+  
+#new-housework
+  +row
+  +page-margin
+
+  form
+    .form-container
+      display: grid
+      grid:
+        gap: 10px
+        auto-columns: 1fr
+
+      .task-input, .points-input
+        max-width: 100%
+        input
+          height: 3rem
+          font:
+            size: 1.5rem
+        
+      .task-input
+        grid:
+          column: 1/4
+
+        +medium
+          grid:
+            column: 1/5
+
+      
+      .points-input
+        grid:
+          column: 4/6
+
+        +medium
+          grid:
+            column: 5/6
+
+      .description-input
+        max-width: 100%
+        grid:
+          column: 1/6
+
+        +medium
+          grid:
+            column: 1/5
+
+    .send-button
+      margin:
+        top: 1.5rem

@@ -1,19 +1,33 @@
 @import "sass/mixins/breakpoints"
 @import "sass/variables/colors"
 @import "sass/mixins/layout"
+@import "sass/buttons"
   
 #houseworks
   +row
   +page-margin
 
-  #min-points
-    width: 90px
-    height: 3rem
-    font:
-      size: 1.8rem
-    padding: 0 .5rem
-    text:
-      align: right
+  form
+    display: inline
+    white-space: nowrap
+
+    #min-points
+      width: 90px
+      height: 3rem
+      font:
+        size: 1.8rem
+      padding: 0 .5rem
+      text:
+        align: right
+
+      &.ng-dirty
+        + .submit
+          display: inline
+
+    .submit
+      vertical-align: top
+      display: none
+
 
   .housework-list-container .housework-list,
   .houseworks-to-approve-container .houseworks-to-approve

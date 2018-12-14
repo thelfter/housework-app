@@ -2,17 +2,17 @@
   <div class="icon-wrapper">
     <i class="fas fa-user"></i>
   </div>
-  <form action="">
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
     <label class="block">
-      <input type="text">
+      <input type="text" formControlName="email">
       <span class="label-text">E-mail cím</span>
     </label>
 
     <label class="block">
-      <input type="password">
+      <input type="password" formControlName="password">
       <span class="label-text">Jelszó</span>
     </label>
 
-    <input type="button" routerLink="/housework-browser" class="primary-button-green" value="Bejelentkezés">
+    <input type="submit" (submit)="submitForm()" class="primary-button-green login-button" value="Bejelentkezés">
   </form>
 </section>

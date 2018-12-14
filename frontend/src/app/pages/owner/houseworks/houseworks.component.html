@@ -1,7 +1,12 @@
 <section id="houseworks">
   <h1>Házimunkák</h1>
 
-  <h2>Havi minimum pontszám: <input type="number" id="min-points" min="1"></h2>
+  <h2>Havi minimum pontszám: 
+    <form>
+      <input type="number" name="min-points" id="min-points" min="1" ngModel>
+      <button class="submit primary-button-green"><i class="fas fa-check"></i></button>
+    </form>
+  </h2>
 
   <div class="houseworks-to-approve-container">
     <h3>Ellenőrzésre várnak:</h3>
@@ -15,7 +20,7 @@
     <h3>Házimunkák listája</h3>
 
     <div class="housework-list">
-      <app-small-housework-card class="new-housework" [title]="'Új házimunka'" [value]="'+'"></app-small-housework-card>
+      <app-small-housework-card routerLink="/new-housework" class="new-housework" [title]="'Új házimunka'" [value]="'+'"></app-small-housework-card>
 
       <app-small-housework-card *ngFor="let item of [1,2,3,4,5,6,7]" [title]="'Excepteur sint occaecat cupidatat non proident sunt'" [value]="2"></app-small-housework-card>
     </div>
