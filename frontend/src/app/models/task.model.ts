@@ -8,5 +8,4 @@ export class Task {
   createdDate: Date;
   isCompleted: boolean;
   available: boolean;
-  user: User;
 }

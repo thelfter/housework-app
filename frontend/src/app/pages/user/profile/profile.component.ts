@@ -17,18 +17,27 @@ export class ProfileComponent implements OnInit {
 
   private user: User;
   private inProgressTaskScoreSum: number = 0;
-  private userScore: number = 0;
+  private sumScore: number = 0;
+  private actualScore: number = 0;
+  private inProgressTasks: Task[];
+  private completedTasks: Task[];
 
   async ngOnInit() {
-    this.user = this.authService.getUser;
-    this.userScore = this.user.score;
+    this.user = await this.authService.getUser(window.localStorage.getItem('user'));
+    
+    this.sumScore = this.user.sumScore;
+    this.actualScore = this.user.actualScore;
 
-    let userInProgressTasks: Task[] = this.user.tasks.filter(task => !task.isCompleted);
+    console.log(this.user.tasks);
+
+    this.inProgressTasks = this.user.tasks.filter(task => !task.isCompleted);
+
+    this.completedTasks = this.user.tasks.filter(task => task.isCompleted);
     
 
-    for(let task of userInProgressTasks) {
+    for(let task of this.inProgressTasks) {
       this.inProgressTaskScoreSum += +task.score;
     }
+    
   }
-
 }

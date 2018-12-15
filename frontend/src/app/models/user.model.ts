@@ -10,12 +10,11 @@ export class User {
   id: number;
   username: string;
   password: string;
-  fullname: string;
+  fullName: string;
   lastLogin: string;
   role: string;
   tasks: Task[];
-  score: number;
-  //scoreSum: number;
-  //scoreActual: number;
+  sumScore: number;
+  actualScore: number;
   room: Room;
 }

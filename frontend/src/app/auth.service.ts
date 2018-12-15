@@ -21,8 +21,10 @@ export class AuthService {
     };*/
   }
 
-  get getUser() {
-    return this.user;
+  public async getUser(username: string) {
+    const user: User = await this.httpService.post('login', username) as User;
+    this.user = user;
+    return user;
   }
 
   get isLoggedIn() {

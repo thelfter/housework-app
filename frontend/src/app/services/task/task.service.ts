@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   public getTask(taskId: number): Promise<Task> {
-    return this.httpService.put<Task>(this.route + '/' + taskId, []);
+    return this.httpService.get<Task>(this.route + '/' + taskId);
   }
 
   public addTask(task: Task): Promise<Task> {
@@ -25,7 +25,7 @@ export class TaskService {
   }
 
   public editTask(taskId: number, task: Task): Promise<Task> {
-    return this.httpService.put<Task>(this.route + '/' + taskId, task);
+    return this.httpService.patch<Task>(this.route + '/' + taskId, task);
   }
 
   public completeTask(taskId: number): Promise<Task> {
