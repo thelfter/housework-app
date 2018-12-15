@@ -11,4 +11,6 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
 
     Iterable<Task> findAllByIsCompletedTrue();
 
+    Iterable<Task> findAllByAvailableTrue();
+
 }

@@ -2,12 +2,10 @@ package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Task;
 import hu.elte.housework.repositories.TaskRepository;
-import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Map;
 import java.util.Optional;
 
@@ -87,6 +85,7 @@ public class TaskController {
         if (oTask.isPresent()) {
             Task task = oTask.get();
             task.setIsCompleted(true);
+            task.setAvailable(false);
             return ResponseEntity.ok(taskRepository.save(task));
         }
 
@@ -106,10 +105,15 @@ public class TaskController {
         return ResponseEntity.notFound().build();
     }
 
-
     @GetMapping("tasks/completed")
     public ResponseEntity<Iterable<Task>> getAllCompleted() {
         Iterable<Task> completed = taskRepository.findAllByIsCompletedTrue();
         return ResponseEntity.ok(completed);
+    }
+
+    @GetMapping("tasks/available")
+    public ResponseEntity<Iterable<Task>> getAllAvailable() {
+        Iterable<Task> available = taskRepository.findAllByAvailableTrue();
+        return ResponseEntity.ok(available);
     }
 }
