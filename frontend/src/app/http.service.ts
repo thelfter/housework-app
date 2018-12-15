@@ -5,14 +5,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class HttpService {
   private get options() {
-    const headers = { 'Content-Type': 'application/json' };
+    const headers = {
+      'Content-Type': 'application/json'
+    };
+
     if (window.localStorage.getItem('token')) {
-      headers['Authorization'] = window.localStorage.getItem('token');
+      headers['Authorization'] = `Basic ${window.localStorage.getItem('token')}`;
     }
-    return({
+
+    return {
       headers: new HttpHeaders(headers)
-    });
-  }
+    }
+  };
 
   private URL = 'http://localhost:8080/api/';
 

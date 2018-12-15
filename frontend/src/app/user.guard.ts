@@ -15,8 +15,7 @@ export class UserGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      
-    if (!this.authService.isLoggedIn || ( !this.authService.getUser.role['user'] && !this.authService.getUser.role['owner'])) {
+    if (!this.authService.isLoggedIn || ( this.authService.getUser.role != 'ROLE_USER' && this.authService.getUser.role != 'ROLE_ADMIN')) {
       this.router.navigateByUrl('/');
     }
 

@@ -8,7 +8,8 @@
         <span routerLink="/sign-up" routerLinkActive="active" class="nav-item">Regisztráció</span>
       </ng-template>
       <ng-template [ngIf]="authService.isLoggedIn">
-        <span routerLink="/housework-manager" *ngIf="authService.checkRole('owner')" routerLinkActive="active" class="nav-item">Házimunka manager</span>
+        <span routerLink="/user-list" *ngIf="authService.checkRole('ROLE_ADMIN')" routerLinkActive="active" class="nav-item">Felhasználók</span>
+        <span routerLink="/housework-manager" *ngIf="authService.checkRole('ROLE_ADMIN')" routerLinkActive="active" class="nav-item">Házimunka manager</span>
         <span routerLink="/housework-browser" routerLinkActive="active" class="nav-item">Házimunka bögészés</span>
         <span routerLink="/profile" routerLinkActive="active" class="nav-item">Profil</span>
         <span (click)="authService.logout()" class="nav-item">Kijelentkezés</span>

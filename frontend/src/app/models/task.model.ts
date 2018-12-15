@@ -1,10 +1,12 @@
+import { User } from "./user.model";
+
 export class Task {
   id: number;
-  name: string;
-  description: string;
+  taskName: string;
+  taskDescription: string;
   score: string;
   createdDate: Date;
-  dueDate: Date;
   isCompleted: boolean;
-  category: string;
+  isAvailable: boolean = true;
+  user: User;
 }

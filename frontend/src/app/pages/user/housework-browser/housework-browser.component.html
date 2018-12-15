@@ -2,6 +2,6 @@
   <h1>Elérhető házimunkák</h1>
 
   <div class="housework-list">
-    <app-housework-list-item [title]="'Excepteur sint occaecat cupidatat non proident sunt in culpa.'" [points]="2" [path]="'/housework/1'" *ngFor="let item of [1,2,3,4,5,6,7]"></app-housework-list-item>
+    <app-housework-list-item [title]="item.taskName" [points]="item.score" [path]="'/housework/'+item.id" *ngFor="let item of tasks"></app-housework-list-item>
   </div>
 </section>

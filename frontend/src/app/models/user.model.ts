@@ -1,3 +1,6 @@
+import { Task } from './task.model';
+import { Room } from './room.model';
+
 class Roles {
   user?: boolean;
   owner?: boolean;
@@ -6,8 +9,14 @@ class Roles {
 export class User {
   id: number;
   username: string;
-  name: string;
-  role: Roles;
-  scoreSum: number;
-  scoreActual: number;
+  password: string;
+  firstName: string;
+  lastName: string;
+  lastLogin: string;
+  role: string;
+  tasks: Task[];
+  score: number;
+  //scoreSum: number;
+  //scoreActual: number;
+  room: Room;
 }

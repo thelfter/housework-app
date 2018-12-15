@@ -16,7 +16,7 @@ export class OwnerGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     
-    if (!this.authService.isLoggedIn || !this.authService.getUser.role['owner']) {
+    if (!this.authService.isLoggedIn || this.authService.getUser.role != 'ROLE_ADMIN') {
       this.router.navigateByUrl('/');
     }
 

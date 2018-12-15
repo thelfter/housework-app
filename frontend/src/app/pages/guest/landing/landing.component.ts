@@ -17,8 +17,8 @@ export class LandingComponent implements OnInit {
     const user: User = this.authService.getUser;
 
     if(user) {
-      if(user.role['owner']) this.router.navigate(['/housework-manager']);
-      else if(user.role['user']) this.router.navigate(['/housework-browser']);
+      if(user.role == 'ROLE_ADMIN') this.router.navigate(['/housework-manager']);
+      else if(user.role == 'ROLE_USER') this.router.navigate(['/housework-browser']);
     }
   }
 

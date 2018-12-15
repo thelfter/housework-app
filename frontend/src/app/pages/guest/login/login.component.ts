@@ -15,8 +15,8 @@ export class LoginComponent implements OnInit {
               private router: Router) {}
 
   private loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
-    password: new FormControl(null, [Validators.minLength(6), Validators.required]),
+    email: new FormControl(null, [Validators.minLength(3), Validators.required]),
+    password: new FormControl(null, [Validators.minLength(4), Validators.required]),
   });
 
   private submitForm() {
@@ -28,8 +28,9 @@ export class LoginComponent implements OnInit {
     } else {
       const userPromise: Promise<User> = this.authService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
       
-      userPromise.then(user => {
-        this.router.navigateByUrl('/');
+      userPromise.catch(() => {}).then((data) => {
+        if(data)
+          this.router.navigateByUrl('/');
       });
     }
   }
