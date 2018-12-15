@@ -5,11 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Entity
@@ -55,7 +55,7 @@ public class Task implements Serializable {
     @PrePersist
     protected void prePersist() {
         if(isCompleted == null) { isCompleted = false; }
-        if(approved == null) { approved = true; }
+        if(approved == null) { approved = false; }
         if(available == null) { available = true; }
         if(createdDate == null) { createdDate = LocalDate.now(); }
     }

@@ -4,14 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.SchemaOutputResolver;
 import java.io.Serializable;
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.List;
 
