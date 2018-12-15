@@ -7,6 +7,5 @@ export class Task {
   score: string;
   createdDate: Date;
   isCompleted: boolean;
-  isAvailable: boolean = true;
-  user: User;
+  available: boolean;
 }

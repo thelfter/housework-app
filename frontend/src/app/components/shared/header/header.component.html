@@ -2,7 +2,12 @@
   <div class="header-wrapper">
     <span class="logo" routerLink="/">HOUSEWORK</span>
 
-    <nav>
+    <div class="hamburger" (click)="toggleNav = !toggleNav" [ngClass]="{'close': toggleNav}">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav [ngClass]="{'open': toggleNav}">
       <ng-template [ngIf]="!authService.isLoggedIn">
         <span routerLink="/login" routerLinkActive="active" class="nav-item">Bejelentkezés</span>
         <span routerLink="/sign-up" routerLinkActive="active" class="nav-item">Regisztráció</span>

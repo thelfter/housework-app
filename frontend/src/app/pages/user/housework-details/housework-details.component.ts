@@ -1,15 +1,46 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TaskService } from '../../../services/task/task.service';
+import { UserService } from '../../../services/user/user.service';
+import { AuthService } from '../../../auth.service';
+import { Task } from '../../../models/task.model';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-housework-details',
   templateUrl: './housework-details.component.html',
-  styleUrls: ['./housework-details.component.sass']
+  styleUrls: ['./housework-details.component.sass'],
+  providers: [TaskService, UserService, AuthService]
 })
 export class HouseworkDetailsComponent implements OnInit {
 
-  constructor() { }
+  private task: Task;
 
-  ngOnInit() {
+  private taskDescription: string;
+  private taskName: string;
+  private score: number;
+  private taskId: number;
+
+  constructor(private taskService: TaskService,
+              private userService: UserService,
+              private authService: AuthService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
+
+  private async addTask() {
+    let user: User;
+    user = await this.authService.getUser(window.localStorage.getItem('user'));
+    this.userService.assignTask(user.id, this.taskId);
+  }
+
+  async ngOnInit() {
+    this.taskId = this.activatedRoute.snapshot.params['id'];
+
+    this.task = await this.taskService.getTask(this.taskId);
+
+    this.taskDescription = this.task.taskDescription;
+    this.taskName = this.task.taskName;
+    this.score = +this.task.score;
   }
 
 }

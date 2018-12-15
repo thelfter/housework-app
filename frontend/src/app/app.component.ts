@@ -13,8 +13,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (window.localStorage.getItem('user')) {
-      this.authService.loginWithToken();
-    }
   }
 }

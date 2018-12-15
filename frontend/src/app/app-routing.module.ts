@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'housework-manager', component: HouseworksComponent, canActivate: [OwnerGuard] },
   { path: 'user-list', component: UserListComponent, canActivate: [OwnerGuard] },
   { path: 'user/:id', component: UserProfileComponent, canActivate: [OwnerGuard] },
+  { path: 'edit-housework/:id', component: NewHouseworkComponent, canActivate: [OwnerGuard] },
   { path: 'new-housework', component: NewHouseworkComponent, canActivate: [OwnerGuard] },
   { path: 'owner', redirectTo: 'houseworks' },
   { path: '**', redirectTo: '' }

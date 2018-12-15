@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from './auth.service';
+import { User } from './models/user.model';
 
 @Injectable()
 export class UserGuard implements CanActivate {
@@ -11,11 +12,13 @@ export class UserGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    state: RouterStateSnapshot): Promise<boolean> {
 
-    if (!this.authService.isLoggedIn || ( this.authService.getUser.role != 'ROLE_USER' && this.authService.getUser.role != 'ROLE_ADMIN')) {
+    const user: User = await this.authService.getUser(window.localStorage.getItem('user'));
+
+    if (!this.authService.isLoggedIn || (user.role != 'ROLE_ADMIN' && user.role != 'ROLE_USER')) {
       this.router.navigateByUrl('/');
     }
 

@@ -2,27 +2,22 @@
   <h1>Profil</h1>
 
   <div class="actual-housework-period">
-    <h3 class="period-name">December</h3>
 
     <div class="points-info-container">
-      <app-points-info-card [title]="'Elért havi pontszám'" [value]="'6/10'"></app-points-info-card>
-      <app-points-info-card [title]="'Listán szereplő pontszámok összege'" [value]="8"></app-points-info-card>
-      <app-points-info-card [title]="'Összpontszám'" [value]="64"></app-points-info-card>
+      <app-points-info-card [title]="'Elért havi pontszám'" [value]="actualScore + '/10'"></app-points-info-card>
+      <app-points-info-card [title]="'Listán szereplő pontszámok összege'" [value]="inProgressTaskScoreSum"></app-points-info-card>
+      <app-points-info-card [title]="'Összpontszám'" [value]="sumScore"></app-points-info-card>
     </div>
     
     <h3>Elvégzendő házimunkák:</h3>
     <div class="todo-housework-container">
-      <app-todo-housework-card [title]="'Excepteur sint occaecat cupidatat non proident sunt in culpa.'" [value]="2"></app-todo-housework-card>
-      <app-todo-housework-card [title]="'Excepteur sint occaecat cupidatat non proident sunt in culpa.'" [value]="1"></app-todo-housework-card>
-      <app-todo-housework-card [title]="'Excepteur sint occaecat cupidatat non proident sunt in culpa.'" [value]="2"></app-todo-housework-card>
-      <app-todo-housework-card [title]="'Excepteur sint occaecat cupidatat non proident sunt in culpa.'" [value]="3"></app-todo-housework-card>
+      <app-todo-housework-card *ngFor="let item of inProgressTasks" [title]="item.taskName" [value]="item.score"></app-todo-housework-card>
+    </div>
+
+    <h3>Elvégzett házimunkák:</h3>
+    <div class="todo-housework-container">
+      <app-todo-housework-card *ngFor="let item of completedTasks" [title]="item.taskName" [value]="item.score"></app-todo-housework-card>
     </div>
     
-  </div>
-
-  <div class="housework-history">
-    <h3>Elvégzett házimunkák:</h3>
-
-    <app-housework-history></app-housework-history>
   </div>
 </section>

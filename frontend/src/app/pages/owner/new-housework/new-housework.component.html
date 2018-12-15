@@ -1,5 +1,5 @@
 <section id="new-housework">
-  <h1>Házimunka hozzáadása</h1>
+  <h1>Házimunka {{ currentUrl == '/new-housework' ? 'hozzáadása' : 'szerkesztése' }}</h1>
 
   
     <form [formGroup]="newHouseworkForm" (ngSubmit)="submitForm()">
@@ -10,17 +10,17 @@
         </label>
 
         <label class="points-input">
-          <input type="number" formControlName="points">
+          <input type="number" formControlName="score">
           <span class="label-text">Pont</span>
         </label>
 
         <label class="block description-input">
-          <textarea formControlName="description"></textarea>
+          <textarea formControlName="taskDescription"></textarea>
           <span class="label-text">Leírás</span>
         </label>
       </div>
 
-      <input type="submit" class="primary-button-green send-button" value="Hozzáad">
+      <input type="submit" class="primary-button-green send-button" [value]="currentUrl == '/new-housework' ? 'Hozzáad' : 'Mentés'">
 
     </form>
 </section>
