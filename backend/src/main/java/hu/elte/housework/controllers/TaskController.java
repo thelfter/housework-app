@@ -1,7 +1,9 @@
 package hu.elte.housework.controllers;
 
 import hu.elte.housework.entities.Task;
+import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.TaskRepository;
+import hu.elte.housework.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ import java.util.Optional;
 public class TaskController {
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping("/tasks")
     public ResponseEntity<Task> postTask(@RequestBody Task task) {
@@ -115,5 +120,39 @@ public class TaskController {
     public ResponseEntity<Iterable<Task>> getAllAvailable() {
         Iterable<Task> available = taskRepository.findAllByAvailableTrue();
         return ResponseEntity.ok(available);
+    }
+
+    @GetMapping("tasks/approved")
+    public ResponseEntity<Iterable<Task>> getAllApproved() {
+        Iterable<Task> approved = taskRepository.findAllByApprovedFalseAndIsCompletedTrue();
+        return ResponseEntity.ok(approved);
+    }
+
+    @GetMapping("tasks/not-approved")
+    public ResponseEntity<Iterable<Task>> getAllNotApproved() {
+        Iterable<Task> notApproved = taskRepository.findAllByApprovedFalseAndIsCompletedTrue();
+        return ResponseEntity.ok(notApproved);
+    }
+
+    @PutMapping("tasks/{id}/approve")
+    public ResponseEntity<Task> approveTask(@PathVariable Integer id) {
+        Optional<Task> oTask = taskRepository.findById(id);
+
+        if(!oTask.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Task task = oTask.get();
+        task.setApproved(true);
+        taskRepository.save(task);
+
+        //No need to check, it should have a user.
+        Optional<User> oUser = userRepository.findById(id);
+
+        User user = oUser.get();
+        user.addScore(task.getScore());
+        userRepository.save(user);
+
+        return ResponseEntity.ok(task);
     }
 }

@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.SchemaOutputResolver;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -45,8 +48,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
-    @Column(name = "score", columnDefinition = "Decimal(10) default '0'")
-    private Integer score;
+    @Column(name = "actualScore", columnDefinition = "Decimal(10) default '0'")
+    private Integer actualScore;
+
+    @Column(name = "sumScore", columnDefinition = "Decimal(10) default '0'")
+    private Integer sumScore;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
     private Room room;
@@ -56,12 +62,14 @@ public class User implements Serializable {
     }
 
     public void addScore(Integer scorePoint) {
-        this.score += scorePoint;
+        this.actualScore += scorePoint;
+        this.sumScore += actualScore;
     }
 
     @PrePersist
     protected void onCreate() {
-        if (score == null) { score = 0; }
+        if (actualScore == null) { actualScore = 0; }
+        if (sumScore == null) { sumScore = 0; }
         if(tasks == null) { tasks = new ArrayList<>(); }
     }
 
