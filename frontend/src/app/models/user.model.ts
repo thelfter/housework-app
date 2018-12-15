@@ -10,8 +10,7 @@ export class User {
   id: number;
   username: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  fullname: string;
   lastLogin: string;
   role: string;
   tasks: Task[];

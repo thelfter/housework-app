@@ -18,7 +18,7 @@ export class HouseworkBrowserComponent implements OnInit {
   async ngOnInit() {
     this.tasks = await this.taskService.getTasks() as Task[];
 
-    //this.availableTasks = this.tasks.filter(task => task.isAvailable);
+    this.availableTasks = this.tasks.filter(task => task.available);
 
     console.log(this.tasks);
   }
