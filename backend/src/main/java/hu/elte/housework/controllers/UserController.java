@@ -100,9 +100,6 @@ public class UserController {
                     case "role":
                         user.setRole(User.Role.valueOf(entry.getValue().toString()));
                         break;
-                    case "score":
-                        user.setScore((Integer) entry.getValue());
-                        break;
                 }
             }
             return ResponseEntity.ok(userRepository.save(user));

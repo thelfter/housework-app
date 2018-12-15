@@ -44,6 +44,9 @@ public class Task implements Serializable {
     @Column(name = "AVAILABLE", columnDefinition = "BOOLEAN DEFAULT true")
     private Boolean available;
 
+    @Column(name = "APPROVED", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean approved;
+
     @ManyToOne
     @JoinColumn
     @JsonIgnore
@@ -52,6 +55,7 @@ public class Task implements Serializable {
     @PrePersist
     protected void prePersist() {
         if(isCompleted == null) { isCompleted = false; }
+        if(approved == null) { approved = true; }
         if(available == null) { available = true; }
         if(createdDate == null) { createdDate = LocalDate.now(); }
     }
