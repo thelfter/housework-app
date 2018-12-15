@@ -6,17 +6,15 @@ import hu.elte.housework.entities.User;
 import hu.elte.housework.repositories.RoomRepository;
 import hu.elte.housework.repositories.TaskRepository;
 import hu.elte.housework.repositories.UserRepository;
-import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -31,6 +29,17 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody String username) {
+        Optional<User> oUser = userRepository.findByUsername(username);
+        System.out.println(username.length());
+        System.out.println(username);
+        if (!oUser.isPresent()) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(oUser.get());
+    }
 
     @PostMapping("/register")
     public ResponseEntity<User> postUser(@RequestBody User user) {
@@ -78,10 +87,7 @@ public class UserController {
                 String key = entry.getKey();
                 switch (key) {
                     case "firstName":
-                        user.setFirstName(entry.getValue().toString());
-                        break;
-                    case "lastName":
-                        user.setLastName(entry.getValue().toString());
+                        user.setFullName(entry.getValue().toString());
                         break;
                     case "room":
                         Optional<Room> oRoom = roomRepository.findById((Integer) entry.getValue());
@@ -105,18 +111,6 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/users/{id}/set-to-owner")
-    public ResponseEntity<User> setUserToOwner(@PathVariable Integer id){
-        Optional<User> oUser = userRepository.findById(id);
-        if(oUser.isPresent()){
-            User user = oUser.get();
-            user.setRole(User.Role.ROLE_OWNER);
-            return ResponseEntity.ok(userRepository.save(user));
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-
     @PutMapping("/users/{id}/add-score")
     public ResponseEntity<User> addScore(@PathVariable Integer id, @RequestParam Integer scorePoint) {
         Optional<User> oUser = userRepository.findById(id);
@@ -134,27 +128,45 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
-    @PutMapping("/users/{id}/assign")
-    public ResponseEntity<Iterable<Task>> assignTask(@PathVariable Integer id, @RequestBody List<Task> tasks) {
+    @PutMapping("/users/{id}/assign/{taskId}")
+    public ResponseEntity<User> assignTask(@PathVariable Integer id, @PathVariable Integer taskId) {
         Optional<User> oUser = userRepository.findById(id);
+        Optional<Task> oTask = taskRepository.findById(taskId);
 
         if (!oUser.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        for (Task task : tasks) {
-            Optional<Task> oTask = taskRepository.findById(task.getId());
-            if (!oTask.isPresent()) {
-                continue;
-            }
-
-            oTask.get().setUser(oUser.get());
-            taskRepository.save(oTask.get());
+        if(!oTask.isPresent()) {
+            return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(oUser.get().getTasks());
+        oTask.get().setUser(oUser.get());
+        oTask.get().setAvailable(false);
+        userRepository.save(oUser.get());
+        taskRepository.save(oTask.get());
 
+        return ResponseEntity.ok(oUser.get());
+    }
 
+    @PutMapping("/users/{id}/unassign/{taskId}")
+    public ResponseEntity<User> unassignTask(@PathVariable Integer id, @PathVariable Integer taskId) {
+        Optional<User> oUser = userRepository.findById(id);
+        Optional<Task> oTask = taskRepository.findById(taskId);
+
+        if (!oUser.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if(!oTask.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        oTask.get().setUser(null);
+        oTask.get().setAvailable(true);
+        taskRepository.save(oTask.get());
+
+        return ResponseEntity.ok(oUser.get());
     }
 
     @DeleteMapping("users/{id}")
@@ -163,7 +175,6 @@ public class UserController {
         if (oUser.isPresent()) {
             userRepository.delete(oUser.get());
             return ResponseEntity.ok().build();
-
         }
 
         return ResponseEntity.notFound().build();

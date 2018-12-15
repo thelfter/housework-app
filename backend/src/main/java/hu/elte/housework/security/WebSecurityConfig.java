@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/category/{\\d+}").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/category/**").access("hasRole('ROLE_USER') or hasRole('ROLE_OWNER') or hasRole('ROLE_ADMIN')")
 
-                .antMatchers("/h2/**", "/api/register").permitAll()   // important!
+                .antMatchers("/h2/**", "/api/register", "/api/login").permitAll()   // important!
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
