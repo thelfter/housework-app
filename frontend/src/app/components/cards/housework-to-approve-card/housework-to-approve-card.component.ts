@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-housework-to-approve-card',
@@ -11,6 +11,17 @@ export class HouseworkToApproveCardComponent implements OnInit {
 
   @Input() name: string;
   @Input() title: string;
+
+  @Output() accept: EventEmitter<any> = new EventEmitter();
+  @Output() reject: EventEmitter<any> = new EventEmitter();
+
+  private approve() {
+    this.accept.emit();
+  }
+
+  private decline() {
+    this.reject.emit();
+  }
 
   ngOnInit() {
   }

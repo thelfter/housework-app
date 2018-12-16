@@ -9,8 +9,8 @@
         </label>
 
         <label class="block">
-          <input type="text" formControlName="email">
-          <span class="label-text">E-mail cím</span>
+          <input type="text" formControlName="username">
+          <span class="label-text">Felhasználó név</span>
         </label>
 
         <label class="block">
@@ -18,14 +18,14 @@
           <span class="label-text">Jelszó</span>
         </label>
 
-        <label class="block birth-date">
+        <!--<label class="block birth-date">
           <input type="number" class="year" formControlName="year" placeholder="Év">
           <select formControlName="month" class="month">
             <option *ngFor="let month of months; let i = index" value="{{i}}">{{month}}</option>
           </select>
           <input type="number" class="day" formControlName="day" placeholder="Nap">
           <span class="label-text">Születési dátum</span>
-        </label>
+        </label>-->
 
         <p>Az ön szobája: {{selectedRoom}}</p>
         <input type="hidden" formControlName="roomId" [value]="selectedRoom">

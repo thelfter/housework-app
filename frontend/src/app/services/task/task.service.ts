@@ -35,4 +35,8 @@ export class TaskService {
   public removeTask(taskId: number): Promise<Task> {
     return this.httpService.delete<Task>(this.route + '/' + taskId);
   }
+
+  public approveTask(taskId: number): Promise<Task> {
+    return this.httpService.put<Task>(this.route + '/' + taskId + '/approve', []);
+  }
 }

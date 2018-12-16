@@ -29,8 +29,13 @@ export class HouseworkDetailsComponent implements OnInit {
 
   private async addTask() {
     let user: User;
-    user = await this.authService.getUser(window.localStorage.getItem('user'));
-    this.userService.assignTask(user.id, this.taskId);
+    this.authService.getUser(window.localStorage.getItem('user')).catch((e) => { console.log(e) }).then((user) => {
+      user = user as User;
+      this.userService.assignTask(user.id, this.taskId).catch((e) => { console.log(e) }).then(() => {
+        this.router.navigate(['/profile']);
+      })
+    })
+    
   }
 
   async ngOnInit() {

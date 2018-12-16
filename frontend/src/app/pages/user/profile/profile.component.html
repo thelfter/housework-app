@@ -11,12 +11,12 @@
     
     <h3>Elvégzendő házimunkák:</h3>
     <div class="todo-housework-container">
-      <app-todo-housework-card *ngFor="let item of inProgressTasks" [title]="item.taskName" [value]="item.score"></app-todo-housework-card>
+      <app-todo-housework-card *ngFor="let item of inProgressTasks" [title]="item.taskName" [value]="item.score" (complete)="completeTask(item.id)" (refuse)="refuseTask(item.id)"></app-todo-housework-card>
     </div>
 
     <h3>Elvégzett házimunkák:</h3>
     <div class="todo-housework-container">
-      <app-todo-housework-card *ngFor="let item of completedTasks" [title]="item.taskName" [value]="item.score"></app-todo-housework-card>
+      <app-small-housework-card *ngFor="let item of completedTasks" [title]="item.taskName" [value]="item.score"></app-small-housework-card>
     </div>
     
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-housework-card',
@@ -11,6 +11,17 @@ export class TodoHouseworkCardComponent implements OnInit {
 
   @Input() title: string;
   @Input() value: number;
+
+  @Output() complete: EventEmitter<any> = new EventEmitter();
+  @Output() refuse: EventEmitter<any> = new EventEmitter();
+
+  private completeTask() {
+    this.complete.emit();
+  }
+
+  private refuseTask() {
+    this.refuse.emit();
+  }
 
   ngOnInit() {
   }

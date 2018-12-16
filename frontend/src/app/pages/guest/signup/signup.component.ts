@@ -12,18 +12,18 @@ export class SignupComponent implements OnInit {
 
   private selectedRoom: number;
 
-  private actualYear = new Date().getFullYear();
+  //private actualYear = new Date().getFullYear();
 
 
-  private months = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
+  //private months = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július', 'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
 
   private signUpForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.email, Validators.required]),
+    username: new FormControl(null, [Validators.minLength(4), Validators.required]),
     password: new FormControl(null, [Validators.minLength(6), Validators.required]),
-    year: new FormControl(null, [Validators.min(this.actualYear - 120), Validators.max(this.actualYear - 6), Validators.required]),
-    month: new FormControl(null, [Validators.required]),
-    day: new FormControl(null, [Validators.min(1), Validators.max(31), Validators.required]),
+    //year: new FormControl(null, [Validators.min(this.actualYear - 120), Validators.max(this.actualYear - 6), Validators.required]),
+    //month: new FormControl(null, [Validators.required]),
+    //day: new FormControl(null, [Validators.min(1), Validators.max(31), Validators.required]),
     roomId: new FormControl(null, [Validators.min(1), Validators.max(4), Validators.required])
   });
 
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.signUpForm.controls['month'].setValue('0');
+    //this.signUpForm.controls['month'].setValue('0');
   }
 
 }

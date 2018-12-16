@@ -24,12 +24,16 @@ export class UserService {
     return this.httpService.delete<void>(this.route + '/' + userId);
   }
 
-  public increasePoints(taskId: number, score: number): Promise<User> {
-    return this.httpService.put<User>(this.route + '/'+ taskId +'/add-score?scorePoint=' + score, []);
+  public increasePoints(userId: number, score: number): Promise<User> {
+    return this.httpService.put<User>(this.route + '/'+ userId +'/add-score?scorePoint=' + score, []);
   }
 
   public assignTask(userId: number, taskId: number): Promise<User> {
     return this.httpService.put<User>(this.route + '/'+ userId +'/assign/' + taskId, []);
+  }
+
+  public unassignTask(userId: number, taskId: number): Promise<User> {
+    return this.httpService.put<User>(this.route + '/'+ userId +'/unassign/' + taskId, []);
   }
 
   

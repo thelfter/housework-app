@@ -14,18 +14,52 @@ export class HouseworksComponent implements OnInit {
 
   private users: User[];
   private tasks: Task[];
-  private completedTasks: Task[];
+  private tasksToReview: Task[];
+  private notCompletedTasks: Task[];
 
   constructor(private taskService: TaskService,
               private userService: UserService) { }
+
+  private async approveTask(task: Task) {
+    console.log(task);
+    await this.taskService.approveTask(task.id);
+    
+    const user: User = this.getAssignedUser(task.id);
+    await this.userService.increasePoints(user.id, +task.score);
+    console.log(user.id);
+
+    this.tasks = await this.taskService.getTasks() as Task[];
+    this.fetchData(this.tasks);
+  }
+
+  private async rejectTask(userId: number, taskId: number) {
+    await this.userService.unassignTask(userId, taskId);
+    this.tasks = await this.taskService.getTasks() as Task[];
+    this.fetchData(this.tasks);
+  }
+
+  private getAssignedUser(taskId: number): User {
+    if(taskId) {
+      for(let user of this.users) {
+        for(let task of user.tasks){
+          if(task.id == taskId) return user;
+        }
+      }
+    }
+    return null;
+  }
+
+  private async fetchData(tasks: Task[]) {
+    this.notCompletedTasks = this.tasks.filter((task) => !task.isCompleted);
+    this.tasksToReview = this.tasks.filter(task => (task.isCompleted && !task.approved));
+  }
 
   async ngOnInit() {
 
     this.users = await this.userService.getUsers() as User[];
     this.tasks = await this.taskService.getTasks() as Task[];
 
-    this.completedTasks = this.tasks.filter(task => task.isCompleted);
-
+    this.fetchData(this.tasks);
   }
 
 }

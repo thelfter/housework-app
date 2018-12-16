@@ -5,7 +5,7 @@
     <h3>Ellenőrzésre várnak:</h3>
 
     <div class="houseworks-to-approve">
-      <app-housework-to-approve-card *ngFor="let item of completedTasks" [name]="item.taskName" [title]=""></app-housework-to-approve-card>
+      <app-housework-to-approve-card *ngFor="let item of tasksToReview" [name]="getAssignedUser(item.id).fullName" [title]="item.taskName" (accept)="approveTask(item)" (reject)="rejectTask(getAssignedUser(item).id, item.id)"></app-housework-to-approve-card>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
     <div class="housework-list">
       <app-small-housework-card routerLink="/new-housework" class="new-housework" [title]="'Új házimunka'" [value]="'+'"></app-small-housework-card>
 
-      <app-small-housework-card [routerLink]="'/edit-housework/'+item.id" *ngFor="let item of tasks" [title]="item.taskName" [value]="item.score"></app-small-housework-card>
+      <app-small-housework-card [routerLink]="'/edit-housework/'+item.id" *ngFor="let item of notCompletedTasks" [title]="item.taskName" [value]="item.score"></app-small-housework-card>
     </div>
     
   </div>

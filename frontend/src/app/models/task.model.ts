@@ -8,4 +8,5 @@ export class Task {
   createdDate: Date;
   isCompleted: boolean;
   available: boolean;
+  approved: boolean;
 }

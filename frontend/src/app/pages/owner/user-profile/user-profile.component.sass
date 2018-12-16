@@ -1,12 +1,20 @@
 @import "sass/mixins/breakpoints"
 @import "sass/mixins/layout"
+@import "sass/buttons"
 @import "sass/variables/colors"
 
 #user-profile
   +row
   +page-margin
 
+  .primary-button-red
+    margin:
+      bottom: 2rem
+    float: right
+
   .actual-housework-period
+    clear: both
+    
     .period-name
       display: block
       text:

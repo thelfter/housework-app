@@ -13,8 +13,8 @@ export class LandingComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router) { }
 
-  ngOnInit() {
-    const user: User = this.authService.getUser;
+  async ngOnInit() {
+    const user: User = await this.authService.getUser(localStorage.getItem('user'));
 
     if(user) {
       if(user.role == 'ROLE_ADMIN') this.router.navigate(['/housework-manager']);

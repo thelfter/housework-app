@@ -13,7 +13,8 @@ import { Task } from '../../../models/task.model';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   private user: User;
   private inProgressTaskScoreSum: number = 0;
@@ -21,21 +22,35 @@ export class UserProfileComponent implements OnInit {
   private actualScore: number = 0;
   private fullName: string = '';
   private inProgressTasks: Task[];
+  private completedTasks: Task[];
 
-  async ngOnInit() {
-    const userId = this.activatedRoute.snapshot.params['id'];
-    this.user = await this.userService.getUser(userId);
+  private fetchData(user: User) {
+    
     this.sumScore = this.user.sumScore;
     this.actualScore = this.user.actualScore;
     this.fullName = this.user.fullName;
 
     this.inProgressTasks = this.user.tasks.filter(task => !task.isCompleted);
-    console.log(this.user.tasks);
-    
+    this.completedTasks = this.user.tasks.filter(task => task.isCompleted);
+    console.log(user);
 
+    this.inProgressTaskScoreSum = 0;
     for(let task of this.inProgressTasks) {
       this.inProgressTaskScoreSum += +task.score;
     }
+  }
+
+  private async removeUser() {
+    const userId = this.activatedRoute.snapshot.params['id'];
+    await this.userService.removeUser(userId);
+    this.router.navigate(['/user-list']);
+  }
+
+  async ngOnInit() {
+    const userId = this.activatedRoute.snapshot.params['id'];
+    this.user = await this.userService.getUser(userId);
+
+    this.fetchData(this.user);
   }
 
 }
