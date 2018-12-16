@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
       } as User;
 
       this.userService.register(user, this.signUpForm.get('roomId').value).catch().then(() => {
-        this.router.navigate['/login'];
+        this.router.navigate(['/login']);
       });
     }
   }
