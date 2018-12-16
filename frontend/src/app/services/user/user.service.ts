@@ -20,6 +20,10 @@ export class UserService {
     return this.httpService.get<User>(this.route + '/' + userId);
   }
 
+  public register(user: User, roomId: number): Promise<User> {
+    return this.httpService.post<User>('register?roomId='+roomId, user);
+  }
+
   public removeUser(userId: number): Promise<void> {
     return this.httpService.delete<void>(this.route + '/' + userId);
   }

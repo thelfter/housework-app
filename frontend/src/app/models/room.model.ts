@@ -5,4 +5,5 @@ export class Room {
   id: number;
   name: string;
   owner: User;
+  reserved: boolean;
 }

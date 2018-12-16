@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { RoomService } from '../../../services/room/room.service';
+import { UserService } from '../../../services/user/user.service';
+import { User } from '../../../models/user.model';
+import { Room } from '../../../models/room.model';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.sass']
+  styleUrls: ['./signup.component.sass'],
+  providers: [UserService, RoomService]
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(private roomService: RoomService,
+              private userService: UserService,
+              private router: Router) { }
 
   private selectedRoom: number;
+  private rooms: Room[];
 
   //private actualYear = new Date().getFullYear();
 
@@ -39,12 +48,21 @@ export class SignupComponent implements OnInit {
         control.markAsTouched({ onlySelf: true });
       });
     } else {
-      console.log(this.signUpForm);
+      const user: User = {
+        fullName: this.signUpForm.get('name').value,
+        username: this.signUpForm.get('username').value,
+        password: this.signUpForm.get('password').value
+      } as User;
+
+      this.userService.register(user, this.signUpForm.get('roomId').value).catch().then(() => {
+        this.router.navigate['/login'];
+      });
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     //this.signUpForm.controls['month'].setValue('0');
+    this.rooms = await this.roomService.getRooms();
   }
 
 }
