@@ -8,8 +8,7 @@ insert into `TASK` (`TASK_NAME`, `TASK_DESCRIPTION`, `SCORE`, `IS_COMPLETED`, `U
 insert into `TASK` (`TASK_NAME`, `TASK_DESCRIPTION`, `SCORE`, `IS_COMPLETED`, `USER_ID`) values ('Mosogatás', 'Elkéne mosogatni.',5, FALSE, NULL);
 insert into `TASK` (`TASK_NAME`, `TASK_DESCRIPTION`, `SCORE`, `IS_COMPLETED`, `USER_ID`) values ('Portörlés', 'Le kéne törölni a port',3, FALSE, NULL);
 
-insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (1, 'Hálószoba 1' , 1);
-insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (2, 'Hálószoba 2' , 2);
-insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (3, 'WC' , NULL);
-insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (4, 'Konyha' , NULL);
-insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`) values (5, 'Fürdőszoba' , NULL);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`, `RESERVED`) values (1, 'Hálószoba 1' , 2, true);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`, `RESERVED`) values (2, 'Hálószoba 2' , 3, true);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`, `RESERVED`) values (3, 'Hálószoba 3' , NULL, false);
+insert into `ROOM` (`ROOM_ID`, `NAME`, `USER_ID`, `RESERVED`) values (4, 'Hálószoba 4' , NULL, false);
