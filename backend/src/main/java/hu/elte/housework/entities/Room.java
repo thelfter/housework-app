@@ -23,6 +23,9 @@ public class Room implements Serializable {
     @Column
     private String name;
 
+    @Column(name = "RESERVED", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean reserved;
+
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", unique = true)

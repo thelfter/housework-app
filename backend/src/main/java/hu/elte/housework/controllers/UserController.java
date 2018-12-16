@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,14 +41,22 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> postUser(@RequestBody User user) {
+    public ResponseEntity<User> postUser(@RequestBody User user, @RequestBody Integer roomId) {
         Optional<User> oUser = userRepository.findByUsername(user.getUsername());
         if (oUser.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
+
         user.setId(null);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(User.Role.ROLE_USER);
+
+        Optional<Room> oRoom = roomRepository.findById(roomId);
+        Room room = oRoom.get();
+        user.setRoom(room);
+        room.setReserved(true);
+        roomRepository.save(room);
+
         return ResponseEntity.ok(userRepository.save(user));
     }
 
@@ -65,9 +74,9 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
         Optional<User> oUser = userRepository.findById(id);
-        if(oUser.isPresent()){
+        if (oUser.isPresent()) {
             user.setId(id);
             return ResponseEntity.ok(userRepository.save(user));
         }
@@ -79,9 +88,9 @@ public class UserController {
     public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody Map<String, Object> updates) {
         Optional<User> oUser = userRepository.findById(id);
 
-        if(oUser.isPresent()){
+        if (oUser.isPresent()) {
             User user = oUser.get();
-            for(Map.Entry<String, Object> entry : updates.entrySet()) {
+            for (Map.Entry<String, Object> entry : updates.entrySet()) {
                 String key = entry.getKey();
                 switch (key) {
                     case "firstName":
@@ -89,7 +98,7 @@ public class UserController {
                         break;
                     case "room":
                         Optional<Room> oRoom = roomRepository.findById((Integer) entry.getValue());
-                        if(oRoom.isPresent()){
+                        if (oRoom.isPresent()) {
                             user.setRoom(oRoom.get());
                             break;
                         } else {
@@ -112,7 +121,7 @@ public class UserController {
         if (oUser.isPresent()) {
             User user = oUser.get();
 
-            if(scorePoint > 0) {
+            if (scorePoint > 0) {
                 user.addScore(scorePoint);
                 return ResponseEntity.ok(userRepository.save(user));
             }
@@ -132,7 +141,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
-        if(!oTask.isPresent()) {
+        if (!oTask.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -153,7 +162,7 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
-        if(!oTask.isPresent()) {
+        if (!oTask.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
@@ -170,7 +179,17 @@ public class UserController {
     public ResponseEntity deleteUser(@PathVariable Integer id) {
         Optional<User> oUser = userRepository.findById(id);
         if (oUser.isPresent()) {
+
+            List<Task> tasks = oUser.get().getTasks();
+            for (Task task : tasks) {
+                if (task.getApproved()) {
+                    task.setUser(null);
+                    taskRepository.save(task);
+                }
+            }
+
             userRepository.delete(oUser.get());
+
             return ResponseEntity.ok().build();
         }
 
