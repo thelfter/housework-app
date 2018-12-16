@@ -44,6 +44,11 @@ export class NewHouseworkComponent implements OnInit {
     }
   }
 
+  private async removeTask() {
+    await this.taskService.removeTask(this.taskId);
+    this.router.navigate(['/housework-manager']);
+  }
+
   async ngOnInit() {
     this.currentUrl = this.router.url;
     

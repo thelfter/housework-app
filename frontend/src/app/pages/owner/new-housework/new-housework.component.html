@@ -1,6 +1,6 @@
 <section id="new-housework">
   <h1>Házimunka {{ currentUrl == '/new-housework' ? 'hozzáadása' : 'szerkesztése' }}</h1>
-
+  <span (click)="removeTask()" class="primary-button-red">Házimunka eltávolítása</span>
   
     <form [formGroup]="newHouseworkForm" (ngSubmit)="submitForm()">
       <div class="form-container">
