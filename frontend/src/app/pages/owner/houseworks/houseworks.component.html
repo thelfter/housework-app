@@ -5,7 +5,7 @@
     <h3>Ellenőrzésre várnak:</h3>
 
     <div class="houseworks-to-approve">
-      <app-housework-to-approve-card *ngFor="let item of tasksToReview" [name]="getAssignedUser(item.id).fullName" [title]="item.taskName" (accept)="approveTask(item)" (reject)="rejectTask(getAssignedUser(item).id, item.id)"></app-housework-to-approve-card>
+      <app-housework-to-approve-card *ngFor="let item of tasksToReview" [name]="getAssignedUser(item.id).fullName" [title]="item.taskName" (accept)="approveTask(item.id)" (reject)="rejectTask(getAssignedUser(item).id, item.id)"></app-housework-to-approve-card>
     </div>
   </div>
 

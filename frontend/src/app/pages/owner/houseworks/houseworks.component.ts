@@ -20,13 +20,9 @@ export class HouseworksComponent implements OnInit {
   constructor(private taskService: TaskService,
               private userService: UserService) { }
 
-  private async approveTask(task: Task) {
-    console.log(task);
-    await this.taskService.approveTask(task.id);
-    
-    const user: User = this.getAssignedUser(task.id);
-    await this.userService.increasePoints(user.id, +task.score);
-    console.log(user.id);
+  private async approveTask(taskId: number) {
+    await this.taskService.approveTask(taskId);
+    const user: User = this.getAssignedUser(taskId);
 
     this.tasks = await this.taskService.getTasks() as Task[];
     this.fetchData(this.tasks);

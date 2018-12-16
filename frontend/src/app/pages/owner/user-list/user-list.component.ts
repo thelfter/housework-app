@@ -16,6 +16,7 @@ export class UserListComponent implements OnInit {
 
   async ngOnInit() {
     this.users = await this.userService.getUsers() as User[];
+    this.users = this.users.filter((user) => user.role == 'ROLE_USER');
   }
 
 }
