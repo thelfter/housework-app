@@ -32,7 +32,6 @@ export class UserProfileComponent implements OnInit {
 
     this.inProgressTasks = this.user.tasks.filter(task => !task.isCompleted);
     this.completedTasks = this.user.tasks.filter(task => task.isCompleted);
-    console.log(user);
 
     this.inProgressTaskScoreSum = 0;
     for(let task of this.inProgressTasks) {
