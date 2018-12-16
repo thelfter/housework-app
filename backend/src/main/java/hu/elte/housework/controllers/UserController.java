@@ -33,8 +33,6 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody String username) {
         Optional<User> oUser = userRepository.findByUsername(username);
-        System.out.println(username.length());
-        System.out.println(username);
         if (!oUser.isPresent()) {
             return ResponseEntity.status(401).build();
         }
@@ -140,7 +138,7 @@ public class UserController {
 
         oTask.get().setUser(oUser.get());
         oTask.get().setAvailable(false);
-        userRepository.save(oUser.get());
+        //userRepository.save(oUser.get());
         taskRepository.save(oTask.get());
 
         return ResponseEntity.ok(oUser.get());
@@ -159,9 +157,11 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
-        oTask.get().setUser(null);
-        oTask.get().setAvailable(true);
-        taskRepository.save(oTask.get());
+        Task task = oTask.get();
+        task.setUser(null);
+        task.setAvailable(true);
+        task.setIsCompleted(false);
+        taskRepository.save(task);
 
         return ResponseEntity.ok(oUser.get());
     }

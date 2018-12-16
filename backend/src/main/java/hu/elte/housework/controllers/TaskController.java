@@ -147,9 +147,7 @@ public class TaskController {
         taskRepository.save(task);
 
         //No need to check, it should have a user.
-        Optional<User> oUser = userRepository.findById(id);
-
-        User user = oUser.get();
+        User user = task.getUser();
         user.addScore(task.getScore());
         userRepository.save(user);
 
