@@ -53,11 +53,12 @@ public class UserController {
 
         Optional<Room> oRoom = roomRepository.findById(roomId);
         Room room = oRoom.get();
-        user.setRoom(room);
+        room.setOwner(user);
         room.setReserved(true);
+        userRepository.save(user);
         roomRepository.save(room);
 
-        return ResponseEntity.ok(userRepository.save(user));
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/users")
@@ -188,7 +189,14 @@ public class UserController {
                 }
             }
 
+
+            Room room = oUser.get().getRoom();
+            room.setOwner(null);
+            room.setReserved(false);
+            //room.setId(null);
+            oUser.get().setRoom(null);
             userRepository.delete(oUser.get());
+            roomRepository.save(room);
 
             return ResponseEntity.ok().build();
         }
