@@ -36,24 +36,31 @@ Szerepek
 
 ## 2. Tervezés
 ### 2.1 Végpontok
+- `POST /api/login` Bejelentkezés
 - `POST /api/register?roomId=` Regisztrálás
 - `GET /api/users` Tagok listázása
 - `GET /api/users/:id` Egy tag adatlapja
 - `PUT /api/users/:id/add-score?scorePoint=` Egy tag pontszámának növelése
 - `PUT /api/users/:userId/assign/:taskId` Házimunka hozzárendelése egy felhasználóhoz
 - `PUT /api/users/:userId/unassign/:taskId` Egy felhasználó házimunka hozzárendelésének megszűntetése 
+- `PUT /api/users/:id` Egy felhasználó adatainak szerkesztése
+- `PATCH /api/users/:id` Egy felhasználó adatainak részleges szerkesztése
 - `DELETE /api/users/:id` Egy tag törlése
 
 - `POST /api/tasks` Új házimunka hozzáadása
 - `GET /api/tasks` Házimunkák böngészése
 - `GET /api/tasks/:id` Egy házimunka adatlapja
 - `PUT /api/tasks/:id` Házimunka módosítása
+- `PATCH /api/tasks/:id` Házimunka részleges módosítása
 - `PUT /api/tasks/approve` Házimunka jóváhagyása
 - `PATCH /api/tasks/:id/finished` Házimunka státusza 'Kész'-re állítása
 - `DELETE /api/tasks/:id` Házimunka törlése
+- `GET /api/tasks/available` Elérhető házimunkák listázása
+- `GET /api/tasks/approved` Jóváhagyott munkák listázása
 
 - `GET /api/rooms` Szobák lekérése
 - `GET /api/rooms/:id` Egy szoba lekérése
+
 
 
 ### 2.2 Adatbázisterv
