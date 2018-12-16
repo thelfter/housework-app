@@ -14,8 +14,8 @@ public class Scheduler {
     @Autowired
     private UserRepository userRepository;
 
-    @Scheduled(cron = "0 0/5 * * * *")
-    //Scheduled(cron = "0 0 0 * * 1") heti lenullázás
+    //@Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0 0 0 * * 1") //heti lenullázás
     public void ResetScore() {
         Iterable<User> users = userRepository.findAll();
 

@@ -60,7 +60,7 @@ public class User implements Serializable {
 
     public void addScore(Integer scorePoint) {
         this.actualScore += scorePoint;
-        this.sumScore += actualScore;
+        this.sumScore += scorePoint;
     }
 
     @PrePersist
