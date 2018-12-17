@@ -185,8 +185,15 @@ public class UserController {
             for (Task task : tasks) {
                 if (task.getApproved()) {
                     task.setUser(null);
-                    taskRepository.save(task);
+                } else if(task.getIsCompleted() && !task.getApproved()) {
+                    task.setUser(null);
+                    task.setIsCompleted(false);
+                    task.setAvailable(true);
+                } else {
+                    task.setUser(null);
+                    task.setAvailable(true);
                 }
+                taskRepository.save(task);
             }
 
 
@@ -194,6 +201,7 @@ public class UserController {
             room.setOwner(null);
             room.setReserved(false);
             //room.setId(null);
+
             oUser.get().setRoom(null);
             userRepository.delete(oUser.get());
             roomRepository.save(room);
